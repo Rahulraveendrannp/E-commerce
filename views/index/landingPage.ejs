@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/public/stylesheets/landingPage.css" />
+    <link rel="stylesheet" href="/public/stylesheets/userStyle.css" />
+    <!-- <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"
+    />
+    <link rel="shortcut icon" type="image/jpg" href="/public/image/Sole .png" />
+    <title>SHOE ZONE</title>
+  </head>
+  <body>
+    <header style="z-index: 10">
+      <div class="container-fluid header-top">
+        <div class="container d-flex header-top-links justify-content-end">
+          <a class="px-2 d-none d-lg-block" href="">Contact Us</a>
+          <a class="px-2 d-none d-lg-block" href="">About Us</a>
+        </div>
+      </div>
+      <nav
+        class="container navbar navbar-expand-lg bg-black py-3 px-2 line-break"
+      >
+        <div class="container-fluid justify-content-around">
+          <a class="navbar-brand d-flex align-items-center" href="/">
+            <img
+              src="/public/image/Sole .png"
+              alt="Logo"
+              width="40"
+              height="40"
+              class="d-inline-block align-text-top"
+            />
+            <div class="brand-name ms-3">
+              <span>SHOE ZONE</span>
+            </div>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+              <li class="nav-item mx-4 ms-lg-5">
+                <a class="nav-link" href="/categories/63a051ff7b36d782859a1e3e"
+                  >Men</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/categories/63a0523eceb514042442b2f4"
+                  >Women</a
+                >
+              </li>
+            </ul>
+            <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
+              <a class="nav-link" href="/products">Our Collection</a>
+            </span>
+            <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
+              <a class="nav-link" href="/users/wishlist">Wishlist</a>
+            </span>
+            <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
+              <a class="nav-link" href="/users/cart">Cart</a>
+            </span>
+
+            <span class="nav-item nav-link text-center mb-2 mb-lg-0 ms-lg-3">
+              <% if(session){%>
+              <div class="d-block d-lg-none">
+                <hr />
+                <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
+                  <a class="nav-link fw-bold " href="/users/profile"
+                    ><img
+                      src="/Public/img/users/<%=locals.currentUser.photo%>"
+                      height="25px"
+                      alt=""
+                      class="mx-2"
+                    /><%=locals.currentUser.name%></a
+                  >
+                </span>
+                <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
+                  <a
+                    class="nav-link"
+                    style="font-size: 0.85rem"
+                    href="/users/signOut"
+                    >Sign out</a
+                  >
+                </span>
+              </div>
+              <div class="btn-group dropstart d-none d-lg-block">
+                <button
+                  type="button"
+                  class="btn dropdown-toggle button-div"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style="
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    color: grey;
+                    font-weight: 600;
+                  "
+                >
+                  <img
+                    src="/Public/img/users/<%=locals.currentUser.photo%>"
+                    height="25px"
+                    alt=""
+                  />
+                </button>
+                <ul class="dropdown-menu" style="font-size: 0.75rem">
+                  <li
+                    class="dropdown-item border-bottom"
+                    style="pointer-events: none"
+                  >
+                    <%=locals.currentUser.name%>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/users/profile">Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/users/orders">Orders</a>
+                  </li>
+                  <li class="border-bottom">
+                    <a class="dropdown-item" href="/users/addresses">Address</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/users/signOut">Sign Out</a>
+                  </li>
+                </ul>
+              </div>
+
+              <% }else{%>
+              <a class="nav-link" href="/users/signIn">Sign In</a>
+              <%}%>
+            </span>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section class="container mx-auto">
+      <!-- Banner -->
+      <!-- Carousel wrapper -->
+      <%if (banners!=null){%>
+      <div
+        id="carouselVideoExample"
+        class="carousel slide carousel-fade mx-auto"
+        data-bs-ride="carousel"
+        style="position: relative; top: -6px"
+      >
+        <!-- Inner -->
+        <div class="carousel-inner">
+          <!-- Single item -->
+          <%banners.forEach(banner => {%>
+          <div class="carousel-item active">
+            <video class="img-fluid" autoplay loop muted>
+              <source src="<%=banner.videoURL%>" type="video/mp4" />
+            </video>
+            <a href="/<%=banner.url%>">
+              <div
+                class="carousel-caption d-lg-block d-none"
+                style="position: absolute; top: 40%"
+              >
+                <h3 style="text-shadow: 1px 1px #7c7c7c; font-size: 1.7rem">
+                  <%=banner.title%>
+                </h3>
+                <p style="text-shadow: 1px 1px #7c7c7c; font-size: 1rem">
+                  <%=banner.description%>
+                </p>
+              </div>
+            </a>
+            <a href="/<%=banner.url%>">
+              <div
+                class="carousel-caption d-block d-lg-none"
+                style="position: absolute"
+              >
+                <h3 style="text-shadow: 1px 1px #7c7c7c; font-size: 0.8rem">
+                  <%=banner.title%>
+                </h3>
+                <p style="text-shadow: 1px 1px #7c7c7c; font-size: 0.5rem">
+                  <%=banner.description%>
+                </p>
+              </div>
+            </a>
+          </div>
+          <%})%>
+        </div>
+        <!-- Inner -->
+
+        <!-- Controls -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselVideoExample"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselVideoExample"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <%}%>
+      <!-- Carousel wrapper -->
+      <!-- banner -->
+
+      <% if(newReleases != null){%>
+      <div class="line-break text-center py-4">
+        <span class="shadow-heading" style="font-size: 1rem">New Releases</span>
+      </div>
+      <div class="text-center d-flex justify-content-center flex-column my-3">
+        <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
+          <% newReleases.forEach((product,i)=>{%>
+          <div class="col">
+            <div class="card h-100 border-0 rounded">
+              <a href="/products/<%=product._id%>"
+                ><img
+                  src="../../public/img/products/<%=product.thumbnail%>"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h6 class="card-title text-black"><%=product.name%></h6>
+                  <span
+                    style="
+                      font-weight: bold;
+                      color: #7f7f7f;
+                      font-size: 0.75rem;
+                    "
+                    ><%=product.brand%></span
+                  >
+                </div></a
+              >
+            </div>
+          </div>
+          <%})%>
+        </div>
+        <span
+          ><a
+            href="/categories/newReleases"
+            class="btn btn-outline-dark py-2 px-3 mt-5"
+            style="font-size: 0.75rem"
+            >SHOW MORE</a
+          ></span
+        >
+      </div>
+      <%}%>
+      <img
+        class="w-100 my-3 rounded"
+        src="../../public/img/design/Banner.jpg"
+        alt=""
+      />
+
+      <!-- WOMEN -->
+      <div class="line-break text-center py-4">
+        <span class="shadow-heading" style="font-size: 1rem">WOMEN</span>
+      </div>
+      <div class="text-center d-flex justify-content-center flex-column my-3">
+        <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
+          <% women.forEach((product,i)=>{%>
+          <div class="col">
+            <div class="card h-100 border-0">
+              <a href="/products/<%=product._id%>"
+                ><img
+                  src="../../public/img/products/<%=product.thumbnail%>"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h6 class="card-title text-black"><%=product.name%></h6>
+                  <span
+                    style="
+                      font-weight: bold;
+                      color: #7f7f7f;
+                      font-size: 0.75rem;
+                    "
+                    ><%=product.brand%></span
+                  >
+                </div></a
+              >
+            </div>
+          </div>
+          <%})%>
+        </div>
+        <span
+          ><a
+            href="/categories/63a0523eceb514042442b2f4"
+            class="btn btn-outline-dark py-2 px-3 mt-5"
+            style="font-size: 0.75rem"
+            >SHOW MORE</a
+          ></span
+        >
+        <img
+          class="w-75 mt-5 mb-4 mx-auto"
+          src="/public/img/design/distributors.png"
+          alt=""
+        />
+      </div>
+      <div class="line-break text-center py-4">
+        <span class="shadow-heading" style="font-size: 1rem">MEN</span>
+      </div>
+      <div class="text-center d-flex justify-content-center flex-column my-3">
+        <div
+          class="row row-cols-1 row-cols-md-4 g-4 mb-3 justify-content-center"
+        >
+          <% men.forEach((product,i)=>{%>
+          <div class="col">
+            <div class="card h-100 border-0">
+              <a href="/products/<%=product._id%>"
+                ><img
+                  src="../../public/img/products/<%=product.thumbnail%>"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body">
+                  <h6 class="card-title text-black"><%=product.name%></h6>
+                  <span
+                    style="
+                      font-weight: bold;
+                      color: #7f7f7f;
+                      font-size: 0.75rem;
+                    "
+                    ><%=product.brand%></span
+                  >
+                </div></a
+              >
+            </div>
+          </div>
+          <%})%>
+        </div>
+        <span
+          ><a
+            href="/categories/63a051ff7b36d782859a1e3e"
+            class="btn btn-outline-dark py-2 px-3 my-3"
+            style="font-size: 0.75rem"
+            >SHOW MORE</a
+          ></span
+        >
+      </div>
+    </section>
+    <footer class="bg-theme">
+      <div
+        class="container links pt-4 pb-2 row mx-auto line-break d-flex justify-content-around"
+      >
+        <a class="col-lg-2 pb-2 text-center" href="#">Track Shipping</a>
+        <a class="col-lg-2 pb-2 text-center" href="#">Contact Us</a>
+        <a class="col-lg-2 pb-2 text-center" href="#">Customer Care</a>
+        <a class="col-lg-2 pb-2 text-center" href="#">About us</a>
+        <span class="col-lg-2 justify-content-center d-flex align-items-center">
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-whatsapp"></i>
+        </span>
+      </div>
+      <div
+        class="copyright bg-theme py-2 text-center"
+        style="font-size: 0.85rem"
+      >
+        <span
+          >Copyright © 2022 | SHOE ZONE | Made by
+          <a href="https://rahulraveendrannp.github.io/"
+            >RAHUL N P</a
+          ></span
+        >
+      </div>
+    </footer>
+    <script>
+      if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<%- include('../layouts/header') %> <%- include('../layouts/head-links') %>
+<div class="container " style="text-decoration: none">
+<form action="" method="post" enctype="multipart/form-data" class="container row flex-column my-5 mx-auto">
+    <div class="mb-3 col-lg-6">
+      <label for="name" class="px-1" style="font-size: 0.75rem;">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        value="<%= product.name %>"
+        name="name"
+        placeholder="Name"
+      />
+    </div>
+    <div class="mb-3 col-lg-6 d-flex flex-column">
+        <label for="thumbnail" class="px-1" style="font-size: 0.75rem;">Upload Thumbnail</label>
+        <img class=" border" src="/Public/image/products/<%=product.thumbnail%>" width="150px"  alt="">
+      <input
+        class="form-control"
+        id="thumbnail"
+        name="thumbnail"
+        style="margin-top: 10px;"
+        type="file"
+      />
+    </div>
+    <div class="mb-3 col-lg-6 d-flex flex-column">
+      <label for="frontImage" class="px-1" style="font-size: 0.75rem;">Upload front image</label>
+      <img class=" border" src="/Public/image/products/<%=product.frontImage%>" width="150px"  alt="">
+    <input
+      class="form-control"
+      id="frontImage"
+      name="frontImage"
+      style="margin-top: 10px;"
+      type="file"
+    />
+  </div>
+  <div class="mb-3 col-lg-6 d-flex flex-column">
+    <label for="frontImage" class="px-1" style="font-size: 0.75rem;">Upload images (Only 3)</label>
+    <div class="row">
+      <%product.images.forEach((image)=>{%><img class="col-8 col-lg-4 border" src="/Public/image/products/<%=image%>" width="150px" alt=""><%})%>
+    </div>
+  <input
+    class="form-control"
+    id="frontImage"
+    name="images"
+    type="file"
+    style="margin-top: 10px;"
+    multiple
+  />
+</div>
+    <div class="mb-3 col-lg-6" >
+      <select id="inputState" class="form-control" name="category"  required> 
+        <option value="<%=product.category._id%>" class="fw-bold" selected><%=product.category.name%></option> 
+        <%categories.forEach((data)=>{%> 
+          <option value="<%=data._id%>" style="color: rgb(71, 68, 68);"><%=data.name%></option> 
+        <%})%> 
+      </select>
+    </div>
+    <div class="mb-3 col-lg-6" >
+      <select id="brand" class="form-control" name="brand"  required> 
+        <option value="<%=product.brand._id%>" class="fw-bold" selected ><%=product.brand.name%></option> 
+        <%brands.forEach((data)=>{%> 
+          <option value="<%=data._id%>" style="color: rgb(71, 68, 68);"><%=data.name%></option> 
+        <%})%> 
+      </select>
+    </div> 
+    
+    <div class="mb-3 col-lg-6">
+    <label for="Color" class="px-1" style="font-size: 0.75rem;">Color</label>  
+      <input
+          type="text"
+          class="form-control"
+          id="Color"
+          placeholder="Color"
+          name="color"
+          value="<%= product.color %>"
+          required
+        />
+      </div>
+    <div class="mb-3 col-lg-6">
+    <label for="Price" class="px-1" style="font-size: 0.75rem;">Price</label>  
+        <input
+          type="number"
+          class="form-control"
+          id="Price"
+          placeholder="Price"
+          name="price"
+          value="<%= product.price %>"
+          required
+        />
+      </div>
+     
+      
+     
+   
+      <div class="float-end mb-5">
+        <a href="/admin/products" onclick="return confirm('Discard Changes ?')" class="btn btn-secondary text-white my-1">Cancel</a>
+        <button type="submit" class="btn btn-success my-1">
+          <span>Save changes</span>
+        </button>
+        </form>
+      </div>
+</div>
+
+  <%- include('../layouts/footer') %>
