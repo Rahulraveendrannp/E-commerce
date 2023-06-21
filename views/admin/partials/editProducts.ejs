@@ -14,30 +14,38 @@
     </div>
     <div class="mb-3 col-lg-6 d-flex flex-column">
         <label for="thumbnail" class="px-1" style="font-size: 0.75rem;">Upload Thumbnail</label>
-        <img class=" border" src="/Public/image/products/<%=product.thumbnail%>" width="150px"  alt="">
+        <img class=" border" src="/Public/image/products/<%=product.thumbnail%>" width="150px"  alt="" id="output1">
       <input
         class="form-control"
         id="thumbnail"
         name="thumbnail"
         style="margin-top: 10px;"
+        onchange="loadFile1(event)"
         type="file"
       />
     </div>
     <div class="mb-3 col-lg-6 d-flex flex-column">
       <label for="frontImage" class="px-1" style="font-size: 0.75rem;">Upload front image</label>
-      <img class=" border" src="/Public/image/products/<%=product.frontImage%>" width="150px"  alt="">
+      <img class=" border" src="/Public/image/products/<%=product.frontImage%>" width="150px"  alt="" id="output2">
     <input
       class="form-control"
       id="frontImage"
       name="frontImage"
       style="margin-top: 10px;"
+      onchange="loadFile2(event)"
       type="file"
     />
   </div>
   <div class="mb-3 col-lg-6 d-flex flex-column">
     <label for="frontImage" class="px-1" style="font-size: 0.75rem;">Upload images (Only 3)</label>
     <div class="row">
-      <%product.images.forEach((image)=>{%><img class="col-8 col-lg-4 border" src="/Public/image/products/<%=image%>" width="150px" alt=""><%})%>
+      <%product.images.forEach((image,i)=>{%>
+      <img class="col-8 col-lg-4 border" src="/Public/image/products/<%=image%>"
+       width="150px" 
+       alt="" 
+       id="changeimg<%=i%>"
+       >
+       <%})%>
     </div>
   <input
     class="form-control"
@@ -45,6 +53,7 @@
     name="images"
     type="file"
     style="margin-top: 10px;"
+    onchange="loadFile3(event)"
     multiple
   />
 </div>
@@ -64,8 +73,25 @@
         <%})%> 
       </select>
     </div> 
-    
-    <div class="mb-3 col-lg-6">
+    <div class="mb-3 col-lg-6" >
+      <select id="size" class="form-control" name="size"  required> 
+        <option value="<%=product.size%>" class="fw-bold" selected><%=product.size%></option>       
+          <option value="6" style="color: rgb(71, 68, 68);">6</option> 
+          <option value="7" style="color: rgb(71, 68, 68);">7</option> 
+          <option value="8" style="color: rgb(71, 68, 68);">8</option> 
+          <option value="9" style="color: rgb(71, 68, 68);">9</option>        
+      </select>
+    </div>
+    <div class="mb-3 col-lg-6" >
+      <select id="size" class="form-control" name="color"  required> 
+        <option value="<%=product.size%>" class="fw-bold" selected><%=product.color%></option>       
+        <option style="color: rgb(66, 61, 61);" value="black">Black</option> 
+        <option style="color: rgb(66, 61, 61);" value="red">Red</option> 
+        <option style="color: rgb(66, 61, 61);" value="white">White</option> 
+        <option style="color: rgb(66, 61, 61);" value="blue">Blue</option>         
+      </select>
+    </div>
+    <!-- <div class="mb-3 col-lg-6">
     <label for="Color" class="px-1" style="font-size: 0.75rem;">Color</label>  
       <input
           type="text"
@@ -76,7 +102,7 @@
           value="<%= product.color %>"
           required
         />
-      </div>
+      </div> -->
     <div class="mb-3 col-lg-6">
     <label for="Price" class="px-1" style="font-size: 0.75rem;">Price</label>  
         <input
@@ -101,5 +127,22 @@
         </form>
       </div>
 </div>
+
+<script>
+
+let loadFile3= function(event) {
+        for(i=0;i<event.target.files.length;i++){
+              var image = document.getElementById(`changeimg${i}`);
+              image.src=URL.createObjectURL(event.target.files[i]);   }       
+          };
+let loadFile1= function(event) {      
+              var image = document.getElementById("output1");
+              image.src=URL.createObjectURL(event.target.files[0]);   } 
+let loadFile2= function(event) {      
+              var image = document.getElementById("output2");
+              image.src=URL.createObjectURL(event.target.files[0]);   }      
+         
+
+</script>
 
   <%- include('../layouts/footer') %>

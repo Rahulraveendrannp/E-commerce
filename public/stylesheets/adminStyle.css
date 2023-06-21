@@ -1,9 +1,9 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Inter", sans-serif;
     text-transform: uppercase;
-    color: white;   
+   color: white;
     
   }
   html {
@@ -33,7 +33,7 @@
   }
   a {
     text-decoration: none !important;
-    color: #7f7f7f !important;
+    color: #cfc7c7 !important;
   }
   
   a:hover {
@@ -41,17 +41,20 @@
   }
   
   .brand-name {
-    text-shadow: rgb(197, 31, 31);
+    background-clip: text;
     font-weight: bold;
-    color: black;
-    text-shadow: 0px 2px 4px rgb(153, 153, 153);
-    letter-spacing: 4px;
+    background: linear-gradient(316deg, #b9492d 0%, #b69e37 74%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+       letter-spacing: 2px;
     font-size: 25px;
+    
   }
   
   .header-top,
   .bg-theme {
     background-color: #19191a;
+    color: #7f7f7f;
   }
   .header-top-links {
     font-size: 0.8rem;
@@ -175,8 +178,4 @@
     background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
     color: #fff;
   }
-
-  section{
-    background-color: rgb(1, 0, 10);
-  }
-  
+ 

@@ -80,7 +80,7 @@ exports.editPage=async(req,res)=>{
 
     }
     catch(error){
-        console.log("product editing pahe error"+error);
+        console.log("product editing page error"+error);
     }
 }
 
@@ -107,7 +107,7 @@ exports.edit = async (req, res) => {
         if (req.files.images) {
           const newArray = [];
           for (i = 0; i < 3; i++) {
-            newArray = `${req.body.name}_image${i}_${Date.now()}.png`;
+            imageName = `${req.body.name}_image${i}_${Date.now()}.png`;
             sharp(req.files.images[i].buffer)
               .toFormat("png")
               .png({ quality: 80 })

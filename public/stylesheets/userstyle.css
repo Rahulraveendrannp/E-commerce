@@ -1,8 +1,9 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Times New Roman', Times, serif;
-    text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  text-transform: uppercase;
+ color: white;
   }
   html {
     scroll-behavior: smooth;
@@ -15,18 +16,18 @@
     background-color: #000000;
   }
   :root {
-    font-family:'Times New Roman', Times, serif;
+    font-family: "Inter", sans-serif;
     letter-spacing: 2.7px;
   }
   @supports (font-variation-settings: normal) {
     :root {
-      font-family: 'Times New Roman', Times, serif;
+      font-family: "Inter var", sans-serif;
       letter-spacing: 2.7px;
     }
   }
   a {
-    text-decoration: none;
-    color: #7f7f7f !important;
+    text-decoration: none;  
+    color: #cfc7c7 !important;
   }
   
   a:hover {
@@ -34,17 +35,19 @@
   }
   
   .brand-name {
-    text-shadow: grey;
+    background-clip: text;
     font-weight: bold;
-    color: rgb(255, 255, 255);
-    text-shadow: 0px 2px 4px rgb(153, 153, 153);
-    letter-spacing: 4px;
-    font-size: 20px;
+    background: linear-gradient(316deg, #b9492d 0%, #b69e37 74%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+       letter-spacing: 2px;
+    font-size: 25px;
+    
   }
   
   .header-top,
   .bg-theme {
-    background-color: #000000;
+    background-color: #1d1d1d;
     color: #7f7f7f;
   }
   .header-top-links {
@@ -73,10 +76,13 @@
   }
   
   .shadow-heading {
-    text-shadow: grey;
-    color: rgb(255, 255, 255);
-    text-shadow: 0px 2px 4px rgb(153, 153, 153);
-    letter-spacing: 4px;
+    background-clip: text;
+    font-weight: bold;
+    background: linear-gradient(316deg, #b9492d 0%, #b69e37 74%);
+-webkit-text-fill-color: transparent;
+-webkit-background-clip: text;
+text-shadow: rgb(100, 11, 11);
+    letter-spacing: 2px;
     font-size: 20px;
     text-align: center;
   }

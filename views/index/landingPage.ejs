@@ -30,9 +30,11 @@
         </div>
       </div>
       <nav
-        class="container navbar navbar-expand-lg bg-black py-3 px-2 line-break"
+        class="container navbar navbar-expand-lg bg-black py-3 px-2 "
       >
-        <div class="container-fluid justify-content-around">
+      
+        <div class="container-fluid justify-content-around ">
+          <div class="d-flex">
           <a class="navbar-brand d-flex align-items-center" href="/">
             <img
               src="/public/image/Sole .png"
@@ -42,35 +44,44 @@
               class="d-inline-block align-text-top"
             />
             <div class="brand-name ms-3">
-              <span>SHOE ZONE</span>
+              <span  id="logotitle">SHOE ZONE</span>
             </div>
           </a>
           <button
             class="navbar-toggler"
+            style="background-color: #000000; border-color: rgb(87, 85, 84);"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarText"
             aria-controls="navbarText"
             aria-expanded="false"
             aria-label="Toggle navigation"
+          
+
           >
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon" ></span>
           </button>
+        </div>
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
-              <li class="nav-item mx-4 ms-lg-5">
-                <a class="nav-link" href="/categories/63a051ff7b36d782859a1e3e"
+              <li class="nav-item mx-2  ms-lg-3">
+                <a class="nav-link" href="/categories?category=men"
                   >Men</a
                 >
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/categories/63a0523eceb514042442b2f4"
+              <li class="nav-item mx-2 ">
+                <a class="nav-link" href="/categories?category=women"
                   >Women</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/categories?category=kids"
+                  >Kids</a
                 >
               </li>
             </ul>
             <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
-              <a class="nav-link" href="/products">Our Collection</a>
+              <a class="nav-link" href="/products?category=collection" >Our Collection</a>
             </span>
             <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
               <a class="nav-link" href="/users/wishlist">Wishlist</a>
@@ -113,6 +124,7 @@
                     letter-spacing: 2px;
                     color: grey;
                     font-weight: 600;
+      
                   "
                 >
                   <img
@@ -166,15 +178,16 @@
           <!-- Single item -->
           <%banners.forEach(banner => {%>
           <div class="carousel-item active">
-            <video class="img-fluid" autoplay loop muted>
+            <!-- <video class="img-fluid" autoplay loop muted>
               <source src="<%=banner.videoURL%>" type="video/mp4" />
-            </video>
+            </video> -->
+            <img src="/Public/image/banners/<%=banner.image%>" class="img-fluid" alt="">
             <a href="/<%=banner.url%>">
               <div
                 class="carousel-caption d-lg-block d-none"
                 style="position: absolute; top: 40%"
               >
-                <h3 style="text-shadow: 1px 1px #7c7c7c; font-size: 1.7rem">
+                <h3 style="text-shadow: 1px 1px #7c7c7c; font-size: 1.7rem;color: #000000;font-weight: bold;">
                   <%=banner.title%>
                 </h3>
                 <p style="text-shadow: 1px 1px #7c7c7c; font-size: 1rem">
@@ -224,18 +237,18 @@
       <!-- Carousel wrapper -->
       <!-- banner -->
 
-      <% if(newReleases != null){%>
-      <div class="line-break text-center py-4">
-        <span class="shadow-heading" style="font-size: 1rem">New Releases</span>
+      <% if(newArrivals != null){%>
+      <div class="text-center py-4">
+        <span class="shadow-heading" style="font-size: 1rem" >New Shoe Arrivals</span>
       </div>
       <div class="text-center d-flex justify-content-center flex-column my-3">
         <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
-          <% newReleases.forEach((product,i)=>{%>
+          <% newArrivals.forEach((product,i)=>{%>
           <div class="col">
             <div class="card h-100 border-0 rounded">
               <a href="/products/<%=product._id%>"
                 ><img
-                  src="../../public/img/products/<%=product.thumbnail%>"
+                  src="../../public/image/products/<%=product.thumbnail%>"
                   class="card-img-top"
                   alt="..."
                 />
@@ -247,7 +260,7 @@
                       color: #7f7f7f;
                       font-size: 0.75rem;
                     "
-                    ><%=product.brand%></span
+                    ><%=product.brand.name%></span
                   >
                 </div></a
               >
@@ -257,9 +270,10 @@
         </div>
         <span
           ><a
-            href="/categories/newReleases"
+            href="/categories?category=newReleases"  
             class="btn btn-outline-dark py-2 px-3 mt-5"
-            style="font-size: 0.75rem"
+            style="font-size: 0.75rem;background-color: #310e68;
+            background-image: linear-gradient(316deg, #310e68 0%, #5f0f40 74%);"
             >SHOW MORE</a
           ></span
         >
@@ -267,12 +281,12 @@
       <%}%>
       <img
         class="w-100 my-3 rounded"
-        src="../../public/img/design/Banner.jpg"
+        src="../../public/image/1 (1).webp"
         alt=""
       />
 
       <!-- WOMEN -->
-      <div class="line-break text-center py-4">
+      <div class=" text-center py-4">
         <span class="shadow-heading" style="font-size: 1rem">WOMEN</span>
       </div>
       <div class="text-center d-flex justify-content-center flex-column my-3">
@@ -282,7 +296,7 @@
             <div class="card h-100 border-0">
               <a href="/products/<%=product._id%>"
                 ><img
-                  src="../../public/img/products/<%=product.thumbnail%>"
+                  src="../../public/image/products/<%=product.thumbnail%>"
                   class="card-img-top"
                   alt="..."
                 />
@@ -294,7 +308,7 @@
                       color: #7f7f7f;
                       font-size: 0.75rem;
                     "
-                    ><%=product.brand%></span
+                    ><%=product.brand.name%></span
                   >
                 </div></a
               >
@@ -304,19 +318,20 @@
         </div>
         <span
           ><a
-            href="/categories/63a0523eceb514042442b2f4"
+            href="/categories?category=women"
             class="btn btn-outline-dark py-2 px-3 mt-5"
-            style="font-size: 0.75rem"
+            style="font-size: 0.75rem;background-color: #310e68;
+            background-image: linear-gradient(316deg, #310e68 0%, #5f0f40 74%);"
             >SHOW MORE</a
           ></span
         >
         <img
-          class="w-75 mt-5 mb-4 mx-auto"
-          src="/public/img/design/distributors.png"
+          class="w-100 mt-5 mb-4 mx-auto rounded"
+          src="/public/image/2 (1).webp"
           alt=""
         />
       </div>
-      <div class="line-break text-center py-4">
+      <div class=" text-center py-4">
         <span class="shadow-heading" style="font-size: 1rem">MEN</span>
       </div>
       <div class="text-center d-flex justify-content-center flex-column my-3">
@@ -328,7 +343,7 @@
             <div class="card h-100 border-0">
               <a href="/products/<%=product._id%>"
                 ><img
-                  src="../../public/img/products/<%=product.thumbnail%>"
+                  src="../../public/image/products/<%=product.thumbnail%>"
                   class="card-img-top"
                   alt="..."
                 />
@@ -340,7 +355,7 @@
                       color: #7f7f7f;
                       font-size: 0.75rem;
                     "
-                    ><%=product.brand%></span
+                    ><%=product.brand.name%></span
                   >
                 </div></a
               >
@@ -350,9 +365,10 @@
         </div>
         <span
           ><a
-            href="/categories/63a051ff7b36d782859a1e3e"
+            href="/categories?category=men"
             class="btn btn-outline-dark py-2 px-3 my-3"
-            style="font-size: 0.75rem"
+            style="font-size: 0.75rem;background-color: #310e68;
+            background-image: linear-gradient(316deg, #310e68 0%, #5f0f40 74%);"
             >SHOW MORE</a
           ></span
         >
@@ -360,7 +376,7 @@
     </section>
     <footer class="bg-theme">
       <div
-        class="container links pt-4 pb-2 row mx-auto line-break d-flex justify-content-around"
+        class="container links pt-4 pb-2 row mx-auto  d-flex justify-content-around"
       >
         <a class="col-lg-2 pb-2 text-center" href="#">Track Shipping</a>
         <a class="col-lg-2 pb-2 text-center" href="#">Contact Us</a>

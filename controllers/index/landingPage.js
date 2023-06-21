@@ -1,21 +1,39 @@
-const userDetails=require("../../models/user/details")
+const userCollection=require("../../models/user/details");
+const bannerCollection=require("../../models/admin/banner");
+const productCollection=require("../../models/admin/product");
+
 
 exports.viewAll = async (req, res) => {
   try {
     let  currentUser
     if (req.session.userID) {
-     currentUser = await userDetails.findById(req.session.userID);
+     currentUser = await userCollection.findById(req.session.userID);
     }
-   let banners=null
-   let newReleases=null
+    const banners = await bannerCollection.find({ active: true }).limit(3).sort({title:1});
+
+    const allProducts=await productCollection.find({listed:true})
+                                             .populate("category")
+                                             .populate("brand").sort({_id:-1})
+// console.log(allProducts);
+   let newArrivals=allProducts.slice(0, 3);
    let men=[]
    let women=[]
-  
+   let kids=[]
+
+    allProducts.forEach((product)=>{
+      if(product.category.name=="men"){
+        men.push(product)
+      }else if(product.category.name =="women"){
+        women.push(product)
+      }else{
+        kids.push(product)
+      }
+    })
 
     res.render("index/landingPage", {
       session: req.session.userID,
       currentUser,
-      newReleases,
+      newArrivals,
       men,
       women,
       banners,

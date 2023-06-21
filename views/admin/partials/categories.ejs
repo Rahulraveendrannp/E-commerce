@@ -16,8 +16,9 @@
             <th>Action</th>
           </tr>
         </thead>
-        <% details.forEach(function(item,i){ %>
         <tbody>
+        <% details.forEach(function(item,i){ %>
+        
           <tr>
             <td><%= i+1 %></td>
             <td><%= item.name %></td>
@@ -39,8 +40,9 @@
               </a>
             </td>
           </tr>
-        </tbody>
+        
         <% }) %>
+      </tbody>
       </table>
       <% } %>
     <div class="w-25 mx-auto mt-4">

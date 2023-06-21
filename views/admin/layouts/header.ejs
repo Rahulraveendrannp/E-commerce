@@ -7,12 +7,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
-    <!-- <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
     <link
       rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
+      href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"
     />
     <link
       rel="stylesheet"
@@ -21,7 +21,8 @@
     <link
       rel="stylesheet"
       href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css"
-    /> -->
+    />
+    
     <link rel="stylesheet" href="/public/stylesheets/adminStyle.css" />
 
     <link
@@ -34,6 +35,8 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-fixedheader/3.3.2/dataTables.fixedHeader.min.js" integrity="sha512-QPq6TKZkV17PLtYGNrZYpZkx5w9a5sT9+dFBjv1O340LA0p3Rlxte4p1GLHY/l4tMCV5cwLpRvz9eTX1qH2K1A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         html {
@@ -47,7 +50,7 @@
         margin: 10px 0;
       }
       #dataTable > thead {
-        background-color: rgb(1, 0, 10);
+        background-color: rgb(13, 4, 94);
         color: #ece3e3;
         font-weight: lighter;
       }
@@ -77,7 +80,12 @@
         cursor: move;
       }
       .table-hover>tbody>tr:hover>* {
-    color: #64281b;
+    color: #8888a3;
+}
+
+.dataTables_wrapper .dataTables_length select {  
+    background-color: #141313;
+   
 }
 
     </style>

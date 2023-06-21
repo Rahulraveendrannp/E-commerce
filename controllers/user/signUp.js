@@ -145,6 +145,8 @@ exports.sendOtp=async(req,res)=>{
         res.render("user/partials/otp", {
           documentTitle: "OTP Verification | SHOE ZONE",
           errorMessage: "Invalid OTP",
+          newUserDetails:null,
+
         });
       }
    

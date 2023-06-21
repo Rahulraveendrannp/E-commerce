@@ -6,7 +6,8 @@ const customer=require("../controllers/admin/customers");
 const categories=require("../controllers/admin/category");
 const products=require("../controllers/admin/products");
 const brands=require("../controllers/admin/brand");
-const upload=require("../utilities/imageUpload")
+const upload=require("../utilities/imageUpload");
+const banner=require("../controllers/admin/banner")
 
 
 
@@ -45,6 +46,7 @@ router
    .get(categories.editCategoryPage)
    .post(categories.editCategory)
 
+ 
 // Product Management
 router.get("/products",products.viewpage);
 router.post("/products/add_product", upload.fields([
@@ -68,8 +70,6 @@ router.get(
     
     
 
-
-
 // brandMnanagement
 router
    .route("/brands")
@@ -84,6 +84,14 @@ router
    .route("/brands/edit")
    .get(brands.editBrandPage)
    .post(brands.editBrand)
+
+// Banner Management
+router
+  .route("/banner_management")
+  .get(banner.viewall)
+  .post(upload.single("bannerImage"),banner.addBanner)
+  .patch(banner.changeActivity)
+  .delete(banner.deleteBanner)
 
  module.exports=router
   

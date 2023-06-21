@@ -12,7 +12,7 @@ function changeAccess(id, access) {
       },
     });
   }
-
+//categories
   function deleteConfirmation(e,itemName) {
     e.preventDefault();
     const name=itemName
@@ -37,6 +37,7 @@ function changeAccess(id, access) {
 }
 
 
+
 function editConfirmation(e,itemName) {
   e.preventDefault();
   const name=itemName
@@ -59,7 +60,7 @@ function editConfirmation(e,itemName) {
   })
 }
 
-
+//prodcut
 function changeListing(e,itemName) {
   e.preventDefault();
   const name=itemName
@@ -103,4 +104,70 @@ function editProduct(e,itemName) {
       }
   })
 }
+
+
+// Banners
+function deleteBanner(id) {
+  $.ajax({
+    url: "/admin/banner_management",
+    type: "delete",
+    data: {
+      bannerID: id,
+    },
+    success: (res) => {
+      $("#allBanners").load(location.href + " #allBanners");
+    },
+  });
+}
+
+
+function changeActivity(id, active){
+  $.ajax({
+    url: "/admin/banner_management",
+    type: "patch",
+    data: {
+      bannerID: id,
+      currentActivity: active,
+    },
+    success: (res) => {
+      console.log("jshjdhjh");
+      $("#Action" + id).load(location.href + " #Action" + id);
+    },
+  });
+}
+
+
+// function changeActivity(id, active){
+
+//   const options={
+//     method:'PATCH',
+//     headers:{
+//       'Content-Type':'application/json',
+//     },
+//     body: JSON.stringify({bannerID: id,
+//       currentActivity: active,})
+//   }
+
+//   fetch('http://localhost:3001/admin/banner_management',options)
+//      .then(data=>{
+
+//       console.log("jshjdhjh :" ,data);
+//       $("#Action" + id).load(location.href + " #Action" + id);
+//      }).catch(e=>{console.log(e)})
+// }
+
+
+
+
+$(function () {
+var table=  $("#dataTable").DataTable({
+    rowReorder: {
+      selector: "td:nth-child(2)",
+    },
+    responsive: true,
+    "bDestroy": true,
+  });
+  // new $.fn.dataTable.FixedHeader( table );
+});
+
 
