@@ -94,7 +94,7 @@
                 <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
                   <a class="nav-link fw-bold" href="/users/profile"
                     ><img
-                      src="/Public/img/users/<%=locals.currentUser.photo%>"
+                      src="/Public/image/users/<%=locals.currentUser.photo%>"
                       height="25px"
                       alt=""
                       class="mx-2"
@@ -124,7 +124,7 @@
                   "
                 >
                   <img
-                    src="/Public/img/users/<%=locals.currentUser.photo%>"
+                    src="/Public/image/users/<%=locals.currentUser.photo%>"
                     height="25px"
                     alt=""
                   />
@@ -159,13 +159,13 @@
       </nav>
     </header>
     <section class="container mx-auto">
-      <div class="pb-2 d-lg-none line-break text-center my-3">
+      <div class="pb-2 d-lg-none  text-center my-3">
         <span class="shadow-heading" style="font-size: 1.25rem"
           ><%=listingName%></span
         >
       </div>
       <div
-        class="line-break text-center py-4 d-flex justify-content-between px-4"
+        class="text-center py-4 d-flex justify-content-between px-4"
       >
         <div class="dropdown">
           <a
@@ -242,10 +242,11 @@
             placeholder="Search"
             aria-label="Search"
             aria-describedby="addon-wrapping"
+            style="background-color: #afa8a8;"
           />
-          <span class="input-group-text" id="searchButton"
+          <span class="input-group-text" id="searchButton" style="background-color: #4c5353;"
             ><button
-              class="btn bg-transparent btn-sm"
+              class="btn  btn-sm"
               style="font-size: 0.75rem"
               onclick="removeFilter('none')"
             >

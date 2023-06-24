@@ -4,17 +4,18 @@ const categoryCollection=require("../../models/admin/category");
 
 exports.ourCollection=async(req,res)=>{
     try{
-        let collectionId=req.query.category;
-        console.log(collectionId);
+        let collectionId=req.query.category;       
         let listing=req.session.listing;
         let currentUser=null;
         if(req.session.userID){
-          currentUser= await userCollection.findOne({_id:userID})
+          currentUser= await userCollection.findOne({_id:req.session.userID})
         }
         listingName="Our Collection"
-        if(!listing || (collectionId=='collection')){ 
+        if(!listing || (collectionId=='collection' && !req.session.sorted && !req.session.filter)){ 
             listing= await productCollection.find({listed:true}).populate("brand")
         }
+        req.session.sorted=null;
+        req.session.filter=null;
 
         res.render("index/productListing",{
             session:req.session.userID,
@@ -63,6 +64,7 @@ exports.filter=async(req,res)=>{
 
      req.session.listing = currentFilter;
      req.session.filtered = currentFilter;
+     req.session.filter = 1;
     if (!currentFilter && !searchClear) {
         res.json({
           success: 0,
@@ -96,6 +98,7 @@ exports.sortBy = async (req, res) => {
         
             listing= listing.sort((a,b)=> a.price-b.price );
             req.session.listing=listing;
+            req.session.sorted = 1;
             res.json({
                 sorted:1
               });
@@ -104,6 +107,7 @@ exports.sortBy = async (req, res) => {
            
             listing=listing.sort((a,b)=> b.price-a.price );
             req.session.listing=listing;
+            req.session.sorted = 1;
             res.json({
                 sorted:1
               });
@@ -120,7 +124,8 @@ exports.sortBy = async (req, res) => {
                   }
                 return 0;
             } );
-            req.session.listing=listing
+            req.session.listing=listing;
+            req.session.sorted = 1;
             res.json({
                 sorted:1
               });
@@ -165,6 +170,10 @@ exports.categories=async(req,res)=>{
     try{
   let category=req.query.category;
   let listing;
+
+  if(req.session.userID){
+    currentUser= await userCollection.findOne({_id:req.session.userID})
+  }
     if (category== "newReleases") {
       
         listing = await productCollection.find().sort({ _id: -1 });
@@ -185,6 +194,8 @@ exports.categories=async(req,res)=>{
         listing: req.session.listing,
         documentTitle: `${currentCategory[0].name} | SHOE ZONE`,
         listingName: currentCategory[0].name,
+        session:req.session.userID,
+        currentUser
       });
     }
     }

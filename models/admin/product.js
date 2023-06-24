@@ -39,6 +39,7 @@ const productSchema = new mongoose.Schema({
   },
   images: [String],
   stock: Number,
+  
   listed: { type: Boolean, default: true },
 });
 

@@ -63,12 +63,26 @@
             onkeyup="passwordValidator()"
             name="password"
             required
+            onChange="change()" 
           />
           <span
             id="passwordInvalid"
             class="rounded"
             style="font-size: 0.75rem; text-transform: none;color: rgb(201, 79, 79);"
           ></span>
+        </div>
+        <div class="mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword"
+            placeholder="Confirm Password"
+            onkeyup="passwordValidator()"
+            name="confirm-password"
+            required
+            onChange="change()" 
+          />
+         
         </div>
         <input
           type="submit"
@@ -83,5 +97,17 @@
     </div>
   </div>
 </div>
+<script>
+  function change() {
+  const password = document.querySelector('input[name=password]');
+  const confirm = document.querySelector('input[name=confirm-password]');
+  if (confirm.value === password.value) {
+    confirm.setCustomValidity('');
+  } else {
+
+    confirm.setCustomValidity('Passwords do not match');
+  }
+}
+</script>
 <script src="/public/js/user/signUp.js"></script>
 <%- include('../layouts/footer') %>

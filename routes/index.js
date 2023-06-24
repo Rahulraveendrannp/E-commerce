@@ -3,7 +3,9 @@ const router=express.Router();
 const landingPage=require("../controllers/index/landingPage");
 const productListing=require("../controllers/index/productListing");
 const objectIdCheck=require("../middlewares/users/objectIdCheck");
-const product=require("../controllers/index/product")
+const product=require("../controllers/index/product");
+
+
 
 
 // Landing Page
@@ -24,6 +26,10 @@ router.get("/categories", productListing.categories);
 router
   .route("/products/:id")
   .get(objectIdCheck,product.view)
+
+
+
+
 
 
 

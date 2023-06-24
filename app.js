@@ -30,7 +30,7 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    name: "TIMELESS-Session",
+    name: "SHOEZONE-session",
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge:86400000 },

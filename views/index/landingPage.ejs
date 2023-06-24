@@ -97,7 +97,7 @@
                 <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
                   <a class="nav-link fw-bold " href="/users/profile"
                     ><img
-                      src="/Public/img/users/<%=locals.currentUser.photo%>"
+                      src="/Public/image/users/<%=locals.currentUser.photo%>"
                       height="25px"
                       alt=""
                       class="mx-2"
@@ -122,35 +122,35 @@
                   style="
                     text-transform: uppercase;
                     letter-spacing: 2px;
-                    color: grey;
+                    color: rgb(255, 253, 253);
                     font-weight: 600;
       
                   "
                 >
                   <img
-                    src="/Public/img/users/<%=locals.currentUser.photo%>"
+                    src="/Public/image/users/<%=locals.currentUser.photo%>"
                     height="25px"
                     alt=""
                   />
                 </button>
-                <ul class="dropdown-menu" style="font-size: 0.75rem">
+                <ul class="dropdown-menu" style="font-size: 0.75rem;background-color: #000000;">
                   <li
                     class="dropdown-item border-bottom"
-                    style="pointer-events: none"
+                    style="pointer-events: none;color: aliceblue;"
                   >
                     <%=locals.currentUser.name%>
                   </li>
-                  <li>
-                    <a class="dropdown-item" href="/users/profile">Profile</a>
+                  <li >
+                    <a class="dropdown-item" id="icon-item" href="/users/profile">Profile</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/users/orders">Orders</a>
+                    <a class="dropdown-item" id="icon-item" href="/users/orders">Orders</a>
                   </li>
                   <li class="border-bottom">
-                    <a class="dropdown-item" href="/users/addresses">Address</a>
+                    <a class="dropdown-item" id="icon-item" href="/users/addresses">Address</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/users/signOut">Sign Out</a>
+                    <a class="dropdown-item" id="icon-item" href="/users/signOut">Sign Out</a>
                   </li>
                 </ul>
               </div>

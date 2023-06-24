@@ -2,8 +2,16 @@ const express =require('express');
 const router=express.Router();
 const signUp=require("../controllers/user/signUp");
 const signIn=require("../controllers/user/signIn");
-const forgotPassword=require("../controllers/user/forgotPassword")
-
+const forgotPassword=require("../controllers/user/forgotPassword");
+const wishlist=require("../controllers/user/wishlist");
+const profile=require("../controllers/user/profile");
+const imageUpload=require("../utilities/imageUpload");
+const imageProcessor=require("../utilities/imageProcessor");
+const sessionCheck=require("../middlewares/users/sessionCheck");
+const signOut=require("../controllers/user/signOut");
+const cart=require("../controllers/user/cart");
+const checkout=require("../controllers/user/checkout");
+const address=require("../controllers/user/address");
 
 
 
@@ -43,12 +51,49 @@ router.post("/forgotPassword/otpVerification", forgotPassword.otpVerification);
 router.get("/changePassword",forgotPassword.passwordChangePage);
 router.post("/changePassword",forgotPassword.updatePassword);
 
+// Wishlist
+router
+  .route("/wishlist")
+  .get(sessionCheck,wishlist.viewWishlist)
+  .patch(wishlist.addOrRemove)
+  .delete(wishlist.remove)
 
+// Cart
+router
+  .route("/cart")
+  .get(sessionCheck, cart.viewCart)
+  .post(sessionCheck, cart.addToCart)
+  .delete(sessionCheck,cart.removeProduct)
+  .put(sessionCheck,cart.countChange)
+
+
+
+// Profile
+router
+  .route("/profile")
+  .get(sessionCheck,profile.viewPage)
+  .post(sessionCheck,imageUpload.single("photo"),imageProcessor.userProfilePic,profile.upadteUser)
+
+
+// Checkout
+router
+  .route("/cart/checkout")
+  .get(sessionCheck,checkout.viewPage)
+
+  router.post("/cart/checkout/changeDefaultAddress",sessionCheck,checkout.defaultAddress)
+
+
+// Addresses
+router.get("/addresses", sessionCheck, address.viewPage);
+router.post("/addresses/addNew", sessionCheck, address.addNew);
+router.get("/addresses/delete", sessionCheck, address.deleteAddress);
+router.get("/addresses/changeRole", sessionCheck, address.defaultToggler);
   
 
 
 
-
+// Sign out
+router.get("/signOut", sessionCheck,signOut);
 
 
 module.exports=router

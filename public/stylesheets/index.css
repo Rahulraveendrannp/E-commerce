@@ -21,7 +21,7 @@ html {
 }
 .product-details {
   width: 80%;
-  background-color: #272726;
+  background: linear-gradient(316deg, #2e0826 0%, #010f13 74%) !important;
 }
 @media all and (max-width: 768px) {
   .product-details {
@@ -117,4 +117,8 @@ transform: translateX(-50%); */
 
 .carousal-row {
   width: 79%;
+}
+#buyNow,
+#addToCart{
+  background-color: #231542;
 }
