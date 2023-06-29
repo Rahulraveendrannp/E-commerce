@@ -9,6 +9,7 @@ exports.viewCart = async (req, res) => {
     res.render("user/profile/partials/cart", {
       userCart,
       documentTitle: "Your Cart | SHOE ZONE",
+      session:req.session.userID,
     });
   } catch (error) {
     console.log("error rendering cart page:" + error)
@@ -121,7 +122,7 @@ exports.countChange = async (req, res) => {
         "products.$.quantity": count,
         totalPrice: count * product.price,
         "products.$.price": count * product.price,
-        totaQuantity: count
+        totalQuantity: count
       }
     })
     const userCart = await cartCollection.findOne({ customer: req.session.userID });

@@ -30,7 +30,7 @@
         </div>
       </div>
       <nav
-        class="container navbar navbar-expand-lg bg-black py-3 px-2 "
+        class="container navbar navbar-expand-lg bg-transparent py-3 px-2 "
       >
       
         <div class="container-fluid justify-content-around ">
@@ -131,6 +131,7 @@
                     src="/Public/image/users/<%=locals.currentUser.photo%>"
                     height="25px"
                     alt=""
+                    style="border-radius: 20px;"
                   />
                 </button>
                 <ul class="dropdown-menu" style="font-size: 0.75rem;background-color: #000000;">
@@ -183,24 +184,24 @@
             </video> -->
             <img src="/Public/image/banners/<%=banner.image%>" class="img-fluid" alt="">
             <a href="/<%=banner.url%>">
-              <div
+              <!-- <div
                 class="carousel-caption d-lg-block d-none"
                 style="position: absolute; top: 40%"
               >
-                <h3 style="text-shadow: 1px 1px #7c7c7c; font-size: 1.7rem;color: #000000;font-weight: bold;">
+                <h3 style="text-shadow: 2px 2px #1d1919; font-size: 1.7rem;color: #000000;font-weight: bold;">
                   <%=banner.title%>
                 </h3>
                 <p style="text-shadow: 1px 1px #7c7c7c; font-size: 1rem">
                   <%=banner.description%>
                 </p>
-              </div>
+              </div> -->
             </a>
             <a href="/<%=banner.url%>">
               <div
                 class="carousel-caption d-block d-lg-none"
                 style="position: absolute"
               >
-                <h3 style="text-shadow: 1px 1px #7c7c7c; font-size: 0.8rem">
+                <h3 style="text-shadow: 1px 1px #631313; font-size: 0.8rem">
                   <%=banner.title%>
                 </h3>
                 <p style="text-shadow: 1px 1px #7c7c7c; font-size: 0.5rem">
@@ -219,8 +220,9 @@
           type="button"
           data-bs-target="#carouselVideoExample"
           data-bs-slide="prev"
+          
         >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="carousel-control-prev-icon" aria-hidden="true" style="background-image: none;"></span>
           <span class="visually-hidden">Previous</span>
         </button>
         <button
@@ -229,7 +231,7 @@
           data-bs-target="#carouselVideoExample"
           data-bs-slide="next"
         >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="carousel-control-next-icon" aria-hidden="true" style="background-image: none;"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
@@ -239,10 +241,10 @@
 
       <% if(newArrivals != null){%>
       <div class="text-center py-4">
-        <span class="shadow-heading" style="font-size: 1rem" >New Shoe Arrivals</span>
+        <span class="shadow-heading" style="font-size: 1.25rem" >New Shoe Arrivals</span>
       </div>
       <div class="text-center d-flex justify-content-center flex-column my-3">
-        <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
+        <div class="row row-cols-2 row-cols-md-4 g-4 justify-content-center">
           <% newArrivals.forEach((product,i)=>{%>
           <div class="col">
             <div class="card h-100 border-0 rounded">
@@ -271,7 +273,7 @@
         <span
           ><a
             href="/categories?category=newReleases"  
-            class="btn btn-outline-dark py-2 px-3 mt-5"
+            class="btn  btn-outline-dark py-2 px-3 mt-5"
             style="font-size: 0.75rem;background-color: #310e68;
             background-image: linear-gradient(316deg, #310e68 0%, #5f0f40 74%);"
             >SHOW MORE</a
@@ -283,14 +285,15 @@
         class="w-100 my-3 rounded"
         src="../../public/image/1 (1).webp"
         alt=""
+
       />
 
       <!-- WOMEN -->
       <div class=" text-center py-4">
-        <span class="shadow-heading" style="font-size: 1rem">WOMEN</span>
+        <span class="shadow-heading" style="font-size: 1.25rem">WOMEN</span>
       </div>
       <div class="text-center d-flex justify-content-center flex-column my-3">
-        <div class="row row-cols-1 row-cols-md-4 g-4 justify-content-center">
+        <div class="row row-cols-2 row-cols-md-4 g-4 justify-content-center">
           <% women.forEach((product,i)=>{%>
           <div class="col">
             <div class="card h-100 border-0">
@@ -332,11 +335,11 @@
         />
       </div>
       <div class=" text-center py-4">
-        <span class="shadow-heading" style="font-size: 1rem">MEN</span>
+        <span class="shadow-heading" style="font-size: 1.25rem">MEN</span>
       </div>
       <div class="text-center d-flex justify-content-center flex-column my-3">
         <div
-          class="row row-cols-1 row-cols-md-4 g-4 mb-3 justify-content-center"
+          class="row row-cols-2 row-cols-md-4 g-4 mb-3 justify-content-center"
         >
           <% men.forEach((product,i)=>{%>
           <div class="col">
@@ -394,7 +397,7 @@
         style="font-size: 0.85rem"
       >
         <span
-          >Copyright © 2022 | SHOE ZONE | Made by
+          >Copyright © 2023 | SHOE ZONE | Made by
           <a href="https://rahulraveendrannp.github.io/"
             >RAHUL N P</a
           ></span

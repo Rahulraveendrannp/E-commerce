@@ -91,18 +91,14 @@
         <option style="color: rgb(66, 61, 61);" value="blue">Blue</option>         
       </select>
     </div>
-    <!-- <div class="mb-3 col-lg-6">
-    <label for="Color" class="px-1" style="font-size: 0.75rem;">Color</label>  
-      <input
-          type="text"
-          class="form-control"
-          id="Color"
-          placeholder="Color"
-          name="color"
-          value="<%= product.color %>"
-          required
-        />
-      </div> -->
+    <div class="mb-3 col-lg-6" >
+      <select id="size" class="form-control" name="subCategory"  required> 
+        <option value="<%=product.subCategory%>" class="fw-bold" selected><%=product.subCategory%></option>       
+        <option style="color: rgb(66, 61, 61);" value="Sports">Sports</option> 
+        <option style="color: rgb(66, 61, 61);" value="Formal">Formal</option> 
+        <option style="color: rgb(66, 61, 61);" value="Casual">Casual</option>         
+      </select>
+    </div>
     <div class="mb-3 col-lg-6">
     <label for="Price" class="px-1" style="font-size: 0.75rem;">Price</label>  
         <input
@@ -115,6 +111,18 @@
           required
         />
       </div>
+      <div class="mb-3 col-lg-6">
+        <label for="Stock" class="px-1" style="font-size: 0.75rem;">Stock</label>  
+            <input
+              type="number"
+              class="form-control"
+              id="Stock"
+              placeholder="Stock"
+              name="stock"
+              value="<%= product.stock %>"
+              required
+            />
+          </div>
      
       
      

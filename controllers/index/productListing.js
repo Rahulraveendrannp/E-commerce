@@ -10,14 +10,21 @@ exports.ourCollection=async(req,res)=>{
         if(req.session.userID){
           currentUser= await userCollection.findOne({_id:req.session.userID})
         }
-        listingName="Our Collection"
-        if(!listing || (collectionId=='collection' && !req.session.sorted && !req.session.filter)){ 
-            listing= await productCollection.find({listed:true}).populate("brand")
+        listingName="Our Collection";
+        if(collectionId=='collection' && !req.session.sorted && !req.session.filter && !req.session.searched){
+          listing= await productCollection.find({listed:true}).populate("brand").limit(9);
+          req.session.listing=listing;
+          
+        }
+        else if(collectionId=='moreCollection' && !req.session.sorted && !req.session.filter && !req.session.searched){
+          listing= await productCollection.find({listed:true}).populate("brand");
+          req.session.listing=listing;
         }
         req.session.sorted=null;
         req.session.filter=null;
+        req.session.searched=null;
 
-        res.render("index/productListing",{
+        res.render("index/productListing",{ 
             session:req.session.userID,
             listingName,
             listing,
@@ -37,23 +44,23 @@ exports.filter=async(req,res)=>{
         let currentFilter
         let searchClear
         switch(req.body.filterBy){
-            case 'men': 
+            case 'Sports': 
                 currentFilter = allProducts.filter(
-                (product) => product.category.name == "men"
+                (product) => product.subCategory == "Sports"
               );
               break;
-            case 'women': 
+            case 'Casual': 
                  currentFilter = allProducts.filter(
-                  (product) => product.category.name == "women"
+                  (product) => product.subCategory == "Casual"
                 );
                 break;
-            case 'kids': 
+            case 'Formal': 
                     currentFilter = allProducts.filter(
-                    (product) => product.category.name == "kids"
+                    (product) => product.subCategory == "Formal"
                   );
                   break;
             case "none":
-                    currentFilter = null;
+                    currentFilter = allProducts.slice(0,9);
                     searchClear=1;
                     break;
             default :
@@ -69,7 +76,7 @@ exports.filter=async(req,res)=>{
         res.json({
           success: 0,
         });
-      } else if( !currentFilter && searchClear) {
+      } else if( searchClear) {
         res.json({
           success: "clear",
         });}
@@ -131,6 +138,7 @@ exports.sortBy = async (req, res) => {
               });
 
         }
+        req.session.sortBy = listing
     
 
     }catch(error){
@@ -143,18 +151,28 @@ exports.search=async(req,res)=>{
     try{
         let searchResult=[];
         let searchInput=req.body.searchInput;
-        if(req.body.filtered){
+        if(req.session.filtered ){
             const regex=new RegExp(searchInput,'i');
             req.session.filtered.forEach(element => {
                 if(regex.exec(element.name)){
                     searchResult.push(element);
                 }
             });
-        }else{
+        }
+       else if(req.session.sortBy){
+          const regex=new RegExp(searchInput,'i');
+          req.session.sortBy.forEach(element => {
+              if(regex.exec(element.name)){
+                  searchResult.push(element);
+              }
+          });
+      }
+      else{
             searchResult=await productCollection.find({
                 name:{$regex:searchInput,$options:'i'},listed:true
             })
         }
+        req.session.searched=1
         req.session.listing=searchResult;
         res.json({
             success: 1,
@@ -170,6 +188,7 @@ exports.categories=async(req,res)=>{
     try{
   let category=req.query.category;
   let listing;
+  let currentUser=null
 
   if(req.session.userID){
     currentUser= await userCollection.findOne({_id:req.session.userID})

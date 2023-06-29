@@ -69,16 +69,16 @@ function search(){
       });
 }
 
-function removeFilter(filterBy) {
+// function removeFilter(filterBy) {
 
-    $.ajax({
-        url:"/products",
-        type:"patch",
-        data:{
-            filterBy:filterBy
-        },
-        success:(res)=>{
-            $("#productContainer").load(location.href + " #productContainer");
-        }
-    })
-}
+//     $.ajax({
+//         url:"/products",
+//         type:"patch",
+//         data:{
+//             filterBy:filterBy
+//         },
+//         success:(res)=>{
+//             $("#productContainer").load(location.href + " #productContainer");
+//         }
+//     })
+// }

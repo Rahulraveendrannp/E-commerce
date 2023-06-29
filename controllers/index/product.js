@@ -1,7 +1,9 @@
 const productCollection=require("../../models/admin/product");
 const categoryCollection=require("../../models/admin/category");
 const userCollection=require("../../models/user/details");
-const wishlistCollection=require("../../models/user/wishlist")
+const wishlistCollection=require("../../models/user/wishlist");
+const reviewCollection=require("../../models/user/reviews.js")
+const moment=require("moment");
 
 
 exports.view=async(req,res)=>{
@@ -15,9 +17,21 @@ exports.view=async(req,res)=>{
                 products:req.params.id
             });
         }
-        let reviews=null;
-        let numberOfReviews=null
-        let moment=null
+        let reviews = await reviewCollection.find({ product: productDetails._id })
+      .sort({
+        createdAt: -1,
+      })
+      .populate({
+        path: "customer",
+        select: "name photo",
+      });
+    const numberOfReviews = reviews.length;
+    reviews = reviews.slice(0, 6);
+    if (reviews == "") {
+      reviews = null;
+    }
+    const similarProducts= await  productCollection.find({}).sort({_id:1}).limit(10)
+       
         res.render("index/product", {
             documentTitle: productDetails.name,
             productDetails,
@@ -26,7 +40,8 @@ exports.view=async(req,res)=>{
             productsInWishlist,
             reviews,
             numberOfReviews,
-            moment
+            moment,
+            listing:similarProducts
           });
 
 

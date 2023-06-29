@@ -28,7 +28,8 @@ router
   .get(objectIdCheck,product.view)
 
 
-
+//404 error page
+router.get("/pageNotFound",landingPage.errorPage)
 
 
 

@@ -15,7 +15,7 @@ exports.viewAll = async (req, res) => {
                                              .populate("category")
                                              .populate("brand").sort({_id:-1})
 // console.log(allProducts);
-   let newArrivals=allProducts.slice(0, 3);
+   let newArrivals=allProducts.slice(0, 8);
    let men=[]
    let women=[]
    let kids=[]
@@ -43,3 +43,11 @@ exports.viewAll = async (req, res) => {
     console.log("Error rendering landing page: " + error);
   }
 };
+
+exports.errorPage=(req,res)=>{
+  res.render("index/404",{
+    url:req.session.url
+  })
+    
+
+}

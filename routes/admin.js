@@ -7,7 +7,12 @@ const categories=require("../controllers/admin/category");
 const products=require("../controllers/admin/products");
 const brands=require("../controllers/admin/brand");
 const upload=require("../utilities/imageUpload");
-const banner=require("../controllers/admin/banner")
+const banner=require("../controllers/admin/banner");
+const coupon =require("../controllers/admin/coupon");
+const orders=require("../controllers/admin/orders");
+const objectIdCheck=require("../middlewares/admin/objectIdCheck")
+const sessionCheck=require("../middlewares/admin/sessionCheck");
+const salesReport=require("../controllers/admin/salesReport")
 
 
 
@@ -23,6 +28,12 @@ router
 router
   .route("/dashboard")
   .get( dashboard.view)
+  .put(dashboard.chartData)
+
+// Sales Report
+router
+   .route("/salesReport")
+   .get(salesReport.download);
 
 
 // CustomerManagement
@@ -67,9 +78,7 @@ router.get(
    products.changeListing
  );
  
-    
-    
-
+   
 // brandMnanagement
 router
    .route("/brands")
@@ -92,6 +101,23 @@ router
   .post(upload.single("bannerImage"),banner.addBanner)
   .patch(banner.changeActivity)
   .delete(banner.deleteBanner)
+
+// Coupon Management
+router
+     .route("/coupon_management")
+     .get(coupon.viewPage)
+     .post(coupon.addNew)
+router.get("/coupon_management/changeActivity",coupon.changeActivity);
+
+// order management
+router
+     .route("/orders")
+     .get(orders.viewPage)
+     .patch( orders.deliver);
+
+router
+     .route("/orders/:id")
+     .get(objectIdCheck, orders.detailsPage);
 
  module.exports=router
   

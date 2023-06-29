@@ -27,7 +27,7 @@
         <div class="modal-dialog" >
           <div class="modal-content"style="background-color: black;border-color:rgb(187, 175, 175);">
             <div class="modal-header" >
-              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:rgb(93, 112, 22); ">
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:rgb(81, 92, 40); ">
                 Add New Product
               </h1>
               <button
@@ -122,17 +122,15 @@
                         
                       </select>
                     </div>
-
-                    <!-- <div class="mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="color"
-                          placeholder="Color"
-                          name="color"
-                          required
-                        />
-                      </div> -->
+                    <div class="mb-3">
+                      <select id="size" class="form-control" name="subCategory"  required> 
+                        <option value=""  style="color: rgb(66, 61, 61);">Choose Sub-category</option> 
+                       <option style="color: rgb(66, 61, 61);" value="Sports">Sports</option> 
+                       <option style="color: rgb(66, 61, 61);" value="Formal">Formal</option> 
+                       <option style="color: rgb(66, 61, 61);" value="Casual">Casual</option> 
+                        
+                      </select>
+                    </div>
                     <div class="mb-3">
                         <input
                           type="number"
@@ -154,6 +152,16 @@
                          <option style="color: rgb(66, 61, 61);" value="9">9</option> 
                           
                         </select>
+                      </div>
+                      <div class="mb-3">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="stock"
+                          placeholder="Stock"
+                          name="stock"
+                          required
+                        />
                       </div>
                       
                 </div>
@@ -186,6 +194,7 @@
               <th>Name</th>
               <th>Image</th>
               <th>Category</th>
+              <th>Sub-Category</th>
               <th>Brand</th>
               <th>Price ₹</th>
               <th>Stock</th>
@@ -199,6 +208,7 @@
               <td><%= item.name %></td>
               <td class="text-center"><img src="/Public/image/products/<%= item.thumbnail %>" alt=""  height="80px"></td>
               <td><%= item.category.name %></td>
+              <td><%= item.subCategory %></td>
               <td><%= item.brand.name %></td>
               <td><%= item.price %></td>
               <td><%= item.stock %></td>

@@ -9,7 +9,8 @@ exports.viewWishlist=async(req,res)=>{
         
         res.render("user/profile/partials/wishlist",{
             userWishlist,
-            documentTitle: "Your Wishlist | SHOE ZONE"
+            documentTitle: "Your Wishlist | SHOE ZONE",
+            session:req.session.userID
         });
     }catch(error){
         res.redirect('/');

@@ -130,7 +130,6 @@ function changeActivity(id, active){
       currentActivity: active,
     },
     success: (res) => {
-      console.log("jshjdhjh");
       $("#Action" + id).load(location.href + " #Action" + id);
     },
   });
@@ -169,5 +168,29 @@ var table=  $("#dataTable").DataTable({
   });
   // new $.fn.dataTable.FixedHeader( table );
 });
+//orders
+function deliverOrder(id, i) {
+  $.ajax({
+    url: "/admin/orders",
+    type: "patch",
+    data: {
+      orderID: id,
+    },
+    success: (res) => {
+      if (res.data.delivered === 1) {
+        $("#deliver" + i).load(location.href + " #deliver" + i);
+      }
+    },
+  });
+}
 
+function printInvoice(divName) {
+  var printContents = document.getElementById(divName).innerHTML;
+  var originalContents = document.body.innerHTML;
 
+  document.body.innerHTML = printContents;
+
+  window.print();
+
+  document.body.innerHTML = originalContents;
+}

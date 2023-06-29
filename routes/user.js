@@ -12,6 +12,9 @@ const signOut=require("../controllers/user/signOut");
 const cart=require("../controllers/user/cart");
 const checkout=require("../controllers/user/checkout");
 const address=require("../controllers/user/address");
+const reviews=require("../controllers/user/review");
+const orders=require("../controllers/user/order");
+const objectIdCheck=require("../middlewares/users/objectIdCheck")
 
 
 
@@ -79,8 +82,13 @@ router
 router
   .route("/cart/checkout")
   .get(sessionCheck,checkout.viewPage)
+  .put(sessionCheck,checkout.couponCheck)
+  .post(sessionCheck,checkout.checkout)
 
-  router.post("/cart/checkout/changeDefaultAddress",sessionCheck,checkout.defaultAddress)
+router.get("/cart/checkout/:id",  checkout.result);
+
+router.post("/cart/checkout/changeDefaultAddress",sessionCheck,checkout.defaultAddress)
+
 
 
 // Addresses
@@ -89,8 +97,20 @@ router.post("/addresses/addNew", sessionCheck, address.addNew);
 router.get("/addresses/delete", sessionCheck, address.deleteAddress);
 router.get("/addresses/changeRole", sessionCheck, address.defaultToggler);
   
+//reviews
+router
+  .route("/reviews")
+  .post(sessionCheck, reviews.addNew)
+  .patch(reviews.helpful);
 
-
+//Order
+router
+   .route("/orders")
+   .get(orders.viewPage)
+router
+   .route("/orders/:id")
+   .get(sessionCheck, objectIdCheck, orders.details)
+   .patch(sessionCheck, objectIdCheck, orders.cancel)
 
 // Sign out
 router.get("/signOut", sessionCheck,signOut);

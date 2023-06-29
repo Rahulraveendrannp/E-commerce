@@ -12,6 +12,10 @@ const productSchema = new mongoose.Schema({
     ref: categoryDetails,
     require,
   },
+  subCategory: {
+    type: String,
+    require,
+  },
   brand: {
     type: mongoose.Types.ObjectId,
     ref: brandDetails,
@@ -37,9 +41,12 @@ const productSchema = new mongoose.Schema({
     type: String,
     require,
   },
+  name: {
+    type: String,
+    require,
+  },
   images: [String],
   stock: Number,
-  
   listed: { type: Boolean, default: true },
 });
 

@@ -19,10 +19,17 @@ html {
 #reviewButtomRight {
   width: 3%;
 }
-.product-details {
-  width: 80%;
+.product-details,.brand-BG {
+  width: 90%;
   background: linear-gradient(316deg, #2e0826 0%, #010f13 74%) !important;
+  border-radius: 10px;
 }
+.product-description{
+  width: 90%;
+  background: linear-gradient(316deg, #2e0826 0%, #010f13 74%) !important;
+  border-radius: 10px;
+}
+
 @media all and (max-width: 768px) {
   .product-details {
     width: 100%;
@@ -120,5 +127,9 @@ transform: translateX(-50%); */
 }
 #buyNow,
 #addToCart{
-  background-color: #231542;
+  background: linear-gradient(316deg, #993a23 0%, #968021 74%);
+}
+#addReview{
+  background-color: #5d8d9b;font-weight: 700;
+  
 }

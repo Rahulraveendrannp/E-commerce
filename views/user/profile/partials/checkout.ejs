@@ -11,10 +11,10 @@
       <% if(products != null){ %>
         <%products.forEach((product,i)=> {%>
       <div class="product-details d-flex justify-content-between pb-1 px-5" style="border-bottom: 1px solid #635d5d" >
-        <span><%=i+1%>.</span>
-        <span class="flex-grow-1 mx-3"><%=product.name.name%></span>
-        <span><span style="text-transform: none;">x</span> <%=product.quantity%></span>
-        <span class="mx-5">₹ <%=product.price%></span>
+        <span class="col-1"><%=i+1%>.</span>
+        <span class="flex-grow-1 mx-3 col-6"><%=product.name.name%></span>
+        <span class="col-2"><span style="text-transform: none;">x</span> <%=product.quantity%></span>
+        <span class="mx-5 col-3">₹ <%=product.price%></span>
       </div>
       <%})%>
       <%}%>
@@ -34,7 +34,7 @@
         Change Address
         </button>
       </div>
-      <form action="/users/cart/checkout" method="post">
+      <form action="/users/cart/checkout" method="post" id="formID">
       <input type="text" name="addressID" value="<%=defaultAddress._id%>" hidden>
       <%}else{%>
         <h6 class="text-danger mt-3" style="text-transform: none;">You have not added any addresses.</h6>
@@ -69,12 +69,14 @@
             id="couponCode"
             placeholder="Coupon Code"
             name = "couponCode"
-            onkeyup="checkCoupon()"
             style="background-color: #c4c1c1;"
           />
         </div>
-        <span id="couponMessage" class="bg-light px-2 rounded m-2">
+        <div class="d-flex align-items-center">
+        <button class=" btn btn-sm btn-primary"  onclick="checkCoupon(event)" style="width: 50px;height: 25px;font-size: small;">Apply</button>
+        <span id="couponMessage" class=" px-2 rounded m-2">
         </span>
+      </div>
     </div>
     <div class="order-summary rounded p-3 my-3 d-flex flex-column" style="background: linear-gradient(316deg, #11010d 0%, #000f13 74%); font-size: 0.9rem;">
       <div class="d-flex justify-content-between  p-1" style="background: linear-gradient(316deg, #11010d 0%, #000f13 74%)">
@@ -97,7 +99,7 @@
       <input type="number" name="finalPrice" value="<%= userCart.totalPrice%>" id="inputFinalPrice" hidden>
     </div>
     <div class="order-summary rounded p-3 my-3 d-flex flex-column" style="background: linear-gradient(316deg, #11010d 0%, #000f13 74%); font-size: 0.9rem;">
-      <button type="submit" onclick="return confirm('Proceed to payment ?')" style="background-color: #1a5512;" class="text-white btn btn-sm" <% if(defaultAddress == 0){%>style="background-color:blue;" disabled<%}%>>Place Order</button>
+      <button type="submit" onclick="return payment(event)" style="background-color: #1a5512;" class="text-white btn btn-sm" <% if(defaultAddress == 0){%>style="background-color:blue;" disabled<%}%>>Place Order</button>
     </div>
   </form>
   </div>
@@ -138,5 +140,5 @@
     </div>
   </div>
 </div>
-<script src="/public/js/user/checkout.js"></script>
+<script src="/public/js/user/coupon.js"></script>
 <%- include('../layouts/footer') %>
