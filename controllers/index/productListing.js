@@ -6,20 +6,28 @@ exports.ourCollection=async(req,res)=>{
     try{
         let collectionId=req.query.category;       
         let listing=req.session.listing;
+        let listingName
         let currentUser=null;
         if(req.session.userID){
           currentUser= await userCollection.findOne({_id:req.session.userID})
         }
-        listingName="Our Collection";
+        if(!req.session.listingName){
+          listingName="Our Collection"
+        }if(req.session.listingName){
+          listingName=req.session.listingName
+        }
+        
         if(collectionId=='collection' && !req.session.sorted && !req.session.filter && !req.session.searched){
           listing= await productCollection.find({listed:true}).populate("brand").limit(9);
           req.session.listing=listing;
-          
+          listingName="Our Collection"
         }
         else if(collectionId=='moreCollection' && !req.session.sorted && !req.session.filter && !req.session.searched){
           listing= await productCollection.find({listed:true}).populate("brand");
           req.session.listing=listing;
+          listingName="Our Collection"
         }
+        console.log(listingName)
         req.session.sorted=null;
         req.session.filter=null;
         req.session.searched=null;
@@ -48,16 +56,19 @@ exports.filter=async(req,res)=>{
                 currentFilter = allProducts.filter(
                 (product) => product.subCategory == "Sports"
               );
+              req.session.listingName="Sports";
               break;
             case 'Casual': 
                  currentFilter = allProducts.filter(
                   (product) => product.subCategory == "Casual"
                 );
+                req.session.listingName="Casuals";
                 break;
             case 'Formal': 
                     currentFilter = allProducts.filter(
                     (product) => product.subCategory == "Formal"
                   );
+                  req.session.listingName="Formals";
                   break;
             case "none":
                     currentFilter = allProducts.slice(0,9);
@@ -72,6 +83,8 @@ exports.filter=async(req,res)=>{
      req.session.listing = currentFilter;
      req.session.filtered = currentFilter;
      req.session.filter = 1;
+     req.session.categorySort=null;
+        req.session.sortBy=null;
     if (!currentFilter && !searchClear) {
         res.json({
           success: 0,
@@ -138,6 +151,8 @@ exports.sortBy = async (req, res) => {
               });
 
         }
+        req.session.categorySort=null;
+        req.session.filtered=null;
         req.session.sortBy = listing
     
 
@@ -152,6 +167,7 @@ exports.search=async(req,res)=>{
         let searchResult=[];
         let searchInput=req.body.searchInput;
         if(req.session.filtered ){
+          console.log('1')
             const regex=new RegExp(searchInput,'i');
             req.session.filtered.forEach(element => {
                 if(regex.exec(element.name)){
@@ -160,6 +176,7 @@ exports.search=async(req,res)=>{
             });
         }
        else if(req.session.sortBy){
+        console.log('2')
           const regex=new RegExp(searchInput,'i');
           req.session.sortBy.forEach(element => {
               if(regex.exec(element.name)){
@@ -167,12 +184,24 @@ exports.search=async(req,res)=>{
               }
           });
       }
+      else if(req.session.categorySort){
+        console.log('3')
+        const regex=new RegExp(searchInput,'i');
+        req.session.categorySort.forEach(element => {
+            if(regex.exec(element.name)){
+              console.log('ggg')
+                searchResult.push(element);
+            }
+        });
+    }
       else{
             searchResult=await productCollection.find({
                 name:{$regex:searchInput,$options:'i'},listed:true
             })
         }
         req.session.searched=1
+       
+        console.log(searchResult)
         req.session.listing=searchResult;
         res.json({
             success: 1,
@@ -193,22 +222,30 @@ exports.categories=async(req,res)=>{
   if(req.session.userID){
     currentUser= await userCollection.findOne({_id:req.session.userID})
   }
+
     if (category== "newReleases") {
       
         listing = await productCollection.find().sort({ _id: -1 });
       
       res.render("index/productListing", {
         listing: listing,
-        documentTitle: `New Releases | SHOE ZONE`,
+        documentTitle: `New Releases | SHOE ZONE`, 
         listingName: "New Releases",
       });
     } else {
-      const currentCategory = await categoryCollection.find({name:category});
+      if(!req.session.searched){
+        const currentCategory = await categoryCollection.find({name:category});
         listing = await productCollection.find({
           category: currentCategory[0]._id,
           listed: true,
         }).populate('brand')
-      req.session.listing=listing;
+        req.session.listing=listing;
+      req.session.categorySort=listing;
+      }
+      
+        req.session.sortBy=null;
+        req.session.filtered=null;
+      
       res.render("index/productListing", {
         listing: req.session.listing,
         documentTitle: `${currentCategory[0].name} | SHOE ZONE`,

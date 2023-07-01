@@ -64,3 +64,22 @@ exports.deliver=async(req,res)=>{
         coonsole.log("erro on delivering product :"+error)
     }
 }
+exports.return=async(req,res)=>{
+    try{
+        await orderCollection.findByIdAndUpdate(req.body.orderID,{
+            $set:{
+                
+                returnedOn: Date.now(),
+                status:"returned",
+                delivered:false
+            }
+        });
+        res.json({
+            data: { returned: 1 },
+          });
+
+    }catch(error){
+        res.redirect("/admin/dashboard")
+        coonsole.log("erro on returning product :"+error)
+    }
+}

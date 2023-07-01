@@ -27,20 +27,20 @@ router
 // Dashboard
 router
   .route("/dashboard")
-  .get( dashboard.view)
-  .put(dashboard.chartData)
+  .get(sessionCheck, dashboard.view)
+  .put(sessionCheck,dashboard.chartData)
 
 // Sales Report
 router
    .route("/salesReport")
-   .get(salesReport.download);
+   .get(sessionCheck,salesReport.download);
 
 
 // CustomerManagement
 router
    .route("/customer_management")
-   .get(customer.viewAll)
-   .patch(customer.changeAccess)
+   .get(sessionCheck,customer.viewAll)
+   .patch(sessionCheck,customer.changeAccess)
 
 // CategoryMnanagement
 router
@@ -50,31 +50,31 @@ router
 
 router
    .route("/categories/delete_category")
-   .get(categories.deleteCategory);
+   .get(sessionCheck,categories.deleteCategory);
 
 router
    .route("/categories/edit")
-   .get(categories.editCategoryPage)
-   .post(categories.editCategory)
+   .get(sessionCheck,categories.editCategoryPage)
+   .post(sessionCheck,categories.editCategory)
 
  
 // Product Management
-router.get("/products",products.viewpage);
-router.post("/products/add_product", upload.fields([
+router.get("/products",sessionCheck,products.viewpage);
+router.post("/products/add_product",sessionCheck, upload.fields([
    { name: "frontImage", maxCount: 1 },
    { name: "thumbnail", maxCount: 1 },
    { name: "images", maxCount: 3 },
  ]),products.addProduct)
 
-router.get("/products/edit",products.editPage);
-router.post("/products/edit",   
+router.get("/products/edit",sessionCheck,products.editPage);
+router.post("/products/edit",sessionCheck,   
       upload.fields([
          { name: "frontImage", maxCount: 1 },
          { name: "thumbnail", maxCount: 1 },
          { name: "images", maxCount: 3 },
 ]),products.edit)
 router.get(
-   "/products/changeListing", 
+   "/products/changeListing",sessionCheck, 
    products.changeListing
  );
  
@@ -82,42 +82,43 @@ router.get(
 // brandMnanagement
 router
    .route("/brands")
-   .get(brands.list)
-   .post( brands.addBrand);
+   .get(sessionCheck,brands.list)
+   .post(sessionCheck, brands.addBrand);
 
 router
    .route("/brands/delete_brand")
-   .get(brands.deleteCategory);
+   .get(sessionCheck,brands.deleteCategory);
 
 router
    .route("/brands/edit")
-   .get(brands.editBrandPage)
-   .post(brands.editBrand)
+   .get(sessionCheck,brands.editBrandPage)
+   .post(sessionCheck,brands.editBrand)
 
 // Banner Management
 router
   .route("/banner_management")
-  .get(banner.viewall)
-  .post(upload.single("bannerImage"),banner.addBanner)
-  .patch(banner.changeActivity)
-  .delete(banner.deleteBanner)
+  .get(sessionCheck,banner.viewall)
+  .post(sessionCheck,upload.single("bannerImage"),banner.addBanner)
+  .patch(sessionCheck,banner.changeActivity)
+  .delete(sessionCheck,banner.deleteBanner)
 
 // Coupon Management
 router
      .route("/coupon_management")
-     .get(coupon.viewPage)
-     .post(coupon.addNew)
+     .get(sessionCheck,coupon.viewPage)
+     .post(sessionCheck,coupon.addNew)
 router.get("/coupon_management/changeActivity",coupon.changeActivity);
 
 // order management
 router
      .route("/orders")
-     .get(orders.viewPage)
-     .patch( orders.deliver);
+     .get(sessionCheck,orders.viewPage)
+     .patch(sessionCheck, orders.deliver)
+     .put(sessionCheck, orders.return)
 
 router
      .route("/orders/:id")
-     .get(objectIdCheck, orders.detailsPage);
+     .get(sessionCheck,objectIdCheck, orders.detailsPage);
 
  module.exports=router
   

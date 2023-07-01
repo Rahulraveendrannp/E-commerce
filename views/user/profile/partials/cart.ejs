@@ -29,6 +29,9 @@
           >
             Price: <%=product.name.price%></span
           >
+          <% if(product.name.stock == '0'){%> <p class="text-danger" style="font-weight: bold;margin-top: 10px;">OUT OF STOCK</p>
+          <p id="stockCheck" hidden><%=product.name.stock%></p>
+            </p><%}%>
           <div class="d-flex justify-content-end mt-2">
             <div class="counter d-flex p-1 align-items-center rounded mx-4">
               <button
@@ -88,7 +91,7 @@
         style="border: 1px solid #2b152e; font-size: 0.9rem;background: linear-gradient(316deg, #20041a 0%, #010f13 74%)"
       >
         <a
-          href="/users/cart/checkout"
+          onclick="checkOut()"
           type="submit"
           class="text-white btn btn-sm button-div"
           style="background-color: rgb(18, 82, 9);"

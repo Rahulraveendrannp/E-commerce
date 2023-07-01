@@ -111,6 +111,7 @@ router
    .route("/orders/:id")
    .get(sessionCheck, objectIdCheck, orders.details)
    .patch(sessionCheck, objectIdCheck, orders.cancel)
+   .put(sessionCheck, objectIdCheck, orders.return)
 
 // Sign out
 router.get("/signOut", sessionCheck,signOut);

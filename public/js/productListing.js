@@ -64,6 +64,7 @@ function search(){
         method: "put",
         data: { searchInput: searchInput },
         success: (res) => {
+          console.log("fgfg"+res);
           $("#productContainer").load(location.href + " #productContainer");
         },
       });

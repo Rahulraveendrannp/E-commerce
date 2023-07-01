@@ -34,7 +34,13 @@ exports.addToCart = async (req, res) => {
       _id: userCart._id,
       products: { $elemMatch: { name: new mongoose.Types.ObjectId(req.body.id) } }
     });
-    if (prodExist) {
+    if(product.stock===0){
+      res.json({
+        success: "outofstcok",
+        message: 0,
+      });
+    }
+   else if (prodExist) {
       await cartCollection.updateOne({
         _id: userCart._id,
         products: { $elemMatch: { name: req.body.id } }

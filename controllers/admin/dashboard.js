@@ -14,7 +14,14 @@ exports.view=async(req,res)=>{
         const customerCount= await userCollection.count();
         let totalRevenue
         if(customerCount){
-            totalRevenue= await orderCollection.aggregate([
+            totalRevenue= await orderCollection.aggregate([{
+                $match:{
+                    status :{
+                        $nin:["cancelled","returned"]
+                    }
+                }
+
+            },
                { $group:{
                     _id:0,
                     totalRevenue:{$sum:"$finalPrice"}
@@ -47,7 +54,14 @@ exports.chartData=async(req,res)=>{
     try{
         let currentYear= new Date();
         currentYear= currentYear.getFullYear();
-        let orderData= await orderCollection.aggregate([
+        let orderData= await orderCollection.aggregate([{
+            $match:{
+                status :{
+                    $nin:["cancelled","returned"]
+                }
+            }
+
+        },
             {
                 $project:{
                     _id:0,
@@ -80,6 +94,7 @@ exports.chartData=async(req,res)=>{
            }
         ]);
         const delivered= await orderCollection.find({delivered : true}).count();
+        const returned= await orderCollection.find({status: "returned"}).count();
         let notDelivered= await orderCollection.aggregate([
           {  $match : { delivered : false} },
           {
@@ -99,7 +114,7 @@ exports.chartData=async(req,res)=>{
             }
         });
       res.json({
-        data:{ orderData, inTransit, cancelled, delivered }
+        data:{ orderData, inTransit, cancelled, delivered , returned }
       })
 
     }catch(error){

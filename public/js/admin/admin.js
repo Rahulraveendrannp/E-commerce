@@ -184,6 +184,21 @@ function deliverOrder(id, i) {
   });
 }
 
+function returnOrder(id, i) {
+  $.ajax({
+    url: "/admin/orders",
+    type: "put",
+    data: {
+      orderID: id,
+    },
+    success: (res) => {
+      if (res.data.returned === 1) {
+        $("#deliver" + i).load(location.href + " #deliver" + i);
+      }
+    },
+  });
+}
+
 function printInvoice(divName) {
   var printContents = document.getElementById(divName).innerHTML;
   var originalContents = document.body.innerHTML;

@@ -35,6 +35,7 @@ const orderShema = mongoose.Schema({
   discountPrice: { type: Number, default: 0 },
   orderedOn: { type: Date, default: Date.now() },
   deliveredOn: { type: Date, default: null },
+  returnedOn: { type: Date, default: null },
 });
 
 const orderCollection = mongoose.model("Orders", orderShema);

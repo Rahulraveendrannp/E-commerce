@@ -35,24 +35,24 @@
         </td>
         <td class="text-center" style="width: 20%">
           <div id="deliver<%=i%>">
-            <%if(item.status === 'In-transit'){%>
-              <% if (item.delivered != true) {%>
+            <%if(item.status === 'In-transit' && item.delivered != true){%>
+             
                 <button
-                  class="btn btn-sm btn-dark w-100"
+                  class="btn btn-sm btn-primary w-100"
                   onclick="deliverOrder('<%=item._id%>','<%=i%>')"
                 >
-                  <i class="fa fa-truck text-warning"></i><span>Deliver</span>
+                  <i class="fa fa-truck text-warning"></i><span> Deliver</span>
                 </button>
-                <%}else{%>
-                <span
-                  ><i class="fa fa-check text-success"></i
-                  ><span>Delivered</span> <%} %> <br /><% if (item.delivered ==
-                  true) {%>
-                  <span><%=moment(item.deliveredOn).format('lll')%></span>
-                  <%}%></span
+                <%} else if(item.status === 'return-requested'){%>
+
+                  <button
+                  class="btn btn-sm btn-danger w-100"
+                  onclick="returnOrder('<%=item._id%>','<%=i%>')"
                 >
+                  <i class="fa fa-arrow-right "></i><span>Accept Return</span>
+                </button>
               <%} else {%>
-                <%=item.status%>
+               <span style="color: rgb(32, 138, 37);"><%=item.status%></span> 
                 <%}%>
             </div>
         </td>

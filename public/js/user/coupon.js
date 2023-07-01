@@ -33,7 +33,6 @@ function payment(e){
         confirmButtonText: 'Yes'
     }).then((result)=>{
         if(result.value){
-            console.log("dbd")
             form.submit()
                 
         }

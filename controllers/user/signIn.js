@@ -24,7 +24,6 @@ exports.signInPage =async (req, res) => {
          const user=await userDetails.findOne({email:inputEmail})
          if(user){
             const hashedCheck= await bcrypt.compare(inputPassword,user.password)
-            console.log("here");
             if(user.access==true){
                 if (hashedCheck) {
                     req.session.userID = user._id;

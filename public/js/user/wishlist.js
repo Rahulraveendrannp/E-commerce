@@ -45,7 +45,19 @@ function removeFromWishlist(id) {
             title: "Added to cart",
           });
           $("#wishlist").load(location.href + " #wishlist");
-        } else {
+        }else if(res.success === "outofstcok" ){
+          Swal.fire({
+            toast: true,
+            icon: "error",
+            position: "top-right",
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            animation: true,
+            title: "Out Of Stock",
+          });
+        }
+         else {
           window.location.href = "/users/signIn";
         }
       },

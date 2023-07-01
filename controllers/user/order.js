@@ -24,6 +24,7 @@ exports.details=async(req,res)=>{
       .populate("summary.product")
       .populate("couponUsed")
       .sort("");
+
     if (currentOrder) {
       res.render("user/profile/partials/orderDetails", {
         documentTitle: "Order Details | SHOE ZONE",
@@ -51,4 +52,39 @@ exports.cancel = async (req, res) => {
       success: 'cancelled'
     })
   }
+
+exports.return=async(req,res)=>{
+  try{
+
+    const currentOrder = await orderCollection
+      .findById(req.params.id)
+
+      const deliverdDate=new Date(currentOrder.deliveredOn);
+      console.log(deliverdDate.getTime());
+      
+      const currentDate=new Date();
+      console.log(currentDate.getTime());
+      console.log(currentDate-deliverdDate);
+      if(currentDate-deliverdDate < 7*24*60*60*1000){
+        await orderCollection.findByIdAndUpdate(req.params.id, {
+          $set: {
+            status: 'return-requested',
+          }
+        })
+        res.json({
+          success: 'return'
+        })
+      }else{
+        res.json({
+          success: 'expired'
+        })
+      }
+      
+    
+
+
+  }catch(error){
+    console.log("error on return order :"+error)
+  }
+}
 

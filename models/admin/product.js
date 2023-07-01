@@ -41,11 +41,8 @@ const productSchema = new mongoose.Schema({
     type: String,
     require,
   },
-  name: {
-    type: String,
-    require,
-  },
   images: [String],
+  offer:Number,
   stock: Number,
   listed: { type: Boolean, default: true },
 });

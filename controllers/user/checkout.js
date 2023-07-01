@@ -4,6 +4,7 @@ const userCollection=require("../../models/user/details");
 const couponCollection=require("../../models/admin/coupons");
 const paypal=require("paypal-rest-sdk");
 const orderCollection=require("../../models/user/orders");
+const productCollection = require("../../models/admin/product");
 
 
 
@@ -11,7 +12,8 @@ exports.viewPage=async(req,res)=>{
     try{
         
         const userCart=await cartCollection.findOne({customer:req.session.userID}).populate("products.name");
-        const products=userCart.products;
+        let products=userCart.products;
+
      if(userCart.totalQuantity != 0){
         let allAddresses=await userCollection.findById(req.session.userID);
         allAddresses=allAddresses.addresses;
@@ -20,12 +22,11 @@ exports.viewPage=async(req,res)=>{
             {$unwind:"$addresses"},
             {$match:{"addresses.primary":true}}
         ]);
-        if (defaultAddress != "") {
+        if (defaultAddress != ""){
             defaultAddress = defaultAddress[0].addresses;
           } else {
             defaultAddress = 0;
           }
-
         res.render("user/profile/partials/checkout", {
             defaultAddress,
             products,
@@ -304,6 +305,12 @@ exports.couponCheck=async(req,res)=>{
             }
           })
         }
+        console.log(req.session.orderDetails.summary)
+        req.session.orderDetails.summary.forEach(async(element) => {
+          await productCollection.findByIdAndUpdate(element.product, 
+            {$inc : {stock: -element.quantity}})
+        });
+        
         await cartCollection.findOneAndUpdate({
           customer:req.session.userID
         },{
