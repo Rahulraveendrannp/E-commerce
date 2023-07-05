@@ -5,6 +5,8 @@ const couponCollection=require("../../models/admin/coupons");
 const paypal=require("paypal-rest-sdk");
 const orderCollection=require("../../models/user/orders");
 const productCollection = require("../../models/admin/product");
+const Razorpay=require("razorpay");
+const nodemailer=require("nodemailer");
 
 
 
@@ -277,6 +279,27 @@ exports.couponCheck=async(req,res)=>{
       }
     );
 
+    }else if(req.body.paymentMethod === "RazorPay"){
+      console.log("here")
+
+      const razorpay = new Razorpay({
+        key_id: process.env.key_id,
+        key_secret: process.env.key_secret
+    });
+    const options = {
+      amount: orderDetails.finalPrice*100,
+      currency: 'INR',
+
+  }
+  razorpay.orders.create(options,(err,order)=>{
+    order.transactionID=transactionID;
+    order.key=process.env.key_id;
+    res.json(order)
+
+  })
+
+    
+       
     }
 
     }catch(error){
@@ -291,6 +314,8 @@ exports.couponCheck=async(req,res)=>{
         req.session.transactionID=false;
         const orderDetails= new orderCollection(req.session.orderDetails)
         await orderDetails.save();
+        let currentUser=await userCollection.findById(req.session.userID)
+        console.log(currentUser.email)
         if(couponUsed){
           await userCollection.findByIdAndUpdate(req.session.userID,{
             $push:{
@@ -316,11 +341,37 @@ exports.couponCheck=async(req,res)=>{
         },{
           $set:{products: [], totalPrice: 0, totalQuantity: 0 }
         });
+        // Transporter
+       const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user:process.env.TRANSPORTER_USERNAME,
+            pass: process.env.TRANSPORTER_PASSWORD
+        }
+    });
+
+      // Mail options
+     const mailOptions =  {
+        from:process.env.TRANSPORTER_USERNAME,
+        to:currentUser.email,
+        subject: "Order Confirmation | SHOE ZONE eCommerce",
+        html: `<h1>Order Placed</h1></br><h2 style="text-color: red, font-weight: bold">YOUR ORDER HAS BEEN PLACED SUCCESSFULLY</h2></br><p>ORDER ID: ${orderDetails._id}</p>`,
+      };
+
+      // Send mail
+       transporter.sendMail(mailOptions,(error,info)=>{
+        if(error){
+          console.log("mesaging sending error"+error);
+        }else{
+          console.log("message send to user email ");
+        }
+      });
         const orderResult = "Order Placed";
       res.render("user/profile/partials/orderResult", {
         documentTitle: orderResult,
         orderID: orderDetails._id,
       });
+
 
       }else {
         res.redirect("/users/cart/checkout");

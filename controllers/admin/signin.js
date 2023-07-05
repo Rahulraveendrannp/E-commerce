@@ -42,7 +42,7 @@ exports.verification = async(req,res)=>{
 
     }catch(error){
 
-console.log("erroe on admin signin"+error);
+console.log("error on admin signin"+error);
 
     }
 

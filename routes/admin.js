@@ -30,6 +30,8 @@ router
   .get(sessionCheck, dashboard.view)
   .put(sessionCheck,dashboard.chartData)
 
+router.get("/chart/:id",dashboard.customChartData)
+
 // Sales Report
 router
    .route("/salesReport")

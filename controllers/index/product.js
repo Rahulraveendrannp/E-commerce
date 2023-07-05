@@ -10,7 +10,11 @@ exports.view=async(req,res)=>{
     try{
         const currentUser= await  userCollection.findById(req.session.userID);
         const productDetails=await productCollection.findById(req.params.id).populate("brand").populate("category");
-        let productsInWishlist=null
+        let productsInWishlist=null;
+        let percentageOffer=null;
+        if(productDetails.initialPrice){
+          percentageOffer=Math.ceil((productDetails.initialPrice-productDetails.price)*100/productDetails.initialPrice);
+        }
         if(currentUser){
             productsInWishlist= await wishlistCollection.findOne({
                 customer:currentUser._id,
@@ -41,7 +45,9 @@ exports.view=async(req,res)=>{
             reviews,
             numberOfReviews,
             moment,
-            listing:similarProducts
+            listing:similarProducts,
+            percentageOffer
+
           });
 
 

@@ -87,8 +87,8 @@
                     ">
                   <img src="/Public/image/users/<%=locals.currentUser.photo%>" height="25px" alt="" />
                 </button>
-                <ul class="dropdown-menu" style="font-size: 0.75rem">
-                  <li class="dropdown-item border-bottom" style="pointer-events: none">
+                <ul class="dropdown-menu" style="font-size: 0.75rem;background-color: black;">
+                  <li class="dropdown-item border-bottom" style="pointer-events: none;color: aliceblue;">
                     <%=locals.currentUser.name%>
                   </li>
                   <li>
@@ -123,23 +123,29 @@
             class="rounded mt-3"
           /> -->
         <div class="product-details rounded d-flex flex-column flex-md-row  my-3 py-5 px-5 align-items-center">
-          <div class="d-flex  flex-md-row  align-items-center ">
-            <div id='lens'></div>
+          <div class="d-flex  flex-md-row  align-items-center">
 
-            <div id='slideshow-items-container'>
-
-              <img class='slideshow-items active' src='../../public/image/products/<%=productDetails.images[0] %>'>
-              <img class='slideshow-items' src='../../public/image/products/<%=productDetails.images[1] %>'>
-              <img class='slideshow-items' src='../../public/image/products/<%=productDetails.images[2] %>'>
-
+            <div class="img-display col-10">
+              <span class="zoom">
+                <img src="../../public/image/products/<%=productDetails.images[0] %>" id="thumbimg" alt="">
+              </span>
             </div>
-            <div id='result'></div>
-            <div class="d-flex flex-column col-8 m-auto" style="padding-left: 10px;" id="setOfImages">
-              <img class='slideshow-thumbnails active' src='../../public/image/products/<%=productDetails.images[0] %>'>
-              <img class='slideshow-thumbnails' src='../../public/image/products/<%=productDetails.images[1] %>'>
-              <img class='slideshow-thumbnails' src='../../public/image/products/<%=productDetails.images[2] %>'>
-
-
+            <div class="thumbnails col-2 " style="margin-left:10px;">
+              <div class="thumb active ">
+                <a href="../../public/image/products/<%=productDetails.images[0] %>">
+                  <img src='../../public/image/products/<%=productDetails.images[0] %>' id="thumbimg" alt="thumb-air-force-right-side">
+                </a>
+              </div>
+              <div class="thumb">
+                <a href="../../public/image/products/<%=productDetails.images[1] %>">
+                  <img src="../../public/image/products/<%=productDetails.images[1] %>" id="thumbimg" alt="thumb-air-force-left-side">
+                </a>
+              </div>
+              <div class="thumb ">
+                <a href="../../public/image/products/<%=productDetails.images[2] %>">
+                  <img src="../../public/image/products/<%=productDetails.images[2] %>" id="thumbimg" alt="thumb-air-force-bottom-side">
+                </a>
+              </div>
             </div>
           </div>
           <div class="product-title col-lg-5 mx-5 p-2 text-white d-flex flex-column justify-content-around">
@@ -154,24 +160,35 @@
             <h3 class="fw-light shadow-product-heading">
               <%=productDetails.name%>
             </h3>
-            <p class="shadow-details">Price: ₹ <%=productDetails.price%>
+            <p class="shadow-details">Price: ₹<%=productDetails.price%>
+                <% if(productDetails.initialPrice){%> <s style="color: rgb(136, 125, 125);">₹<%=productDetails.initialPrice%></s>
+                  <span style="color: rgb(233, 128, 86);">(<%=percentageOffer%>%)</span>
+                  <%}%>
             </p>
-            <div class="model-case d-flex">
-              <p class="w-50 shadow-details"><%=productDetails.subCategory%></p>
+            <p style="font-size: x-small;color: rgb(22, 99, 19);font-weight: bolder;letter-spacing: 0.05rem;">inclusive
+              of all taxes</p>
+            <div class="product--size">
+              <span id="shoesize">s</span>
+              <span class="active" id="shoesize">m</span>
+              <span id="shoesize">l</span>
+              <span id="shoesize">xl</span>
             </div>
-            <% if(productDetails.stock == '0'){%> <p class="text-danger" style="font-weight: bold;">OUT OF STOCK</p>
-            </p><%}%>
-            <div class="buy-cart row text-center justify-content-around  p-0">
-              <div id="buyNow" class="button-div rounded col-8 mb-2 mb-md-0  col-lg-5  p-2  d-flex align-items-center justify-content-center"
-                onclick="buyNow('<%=productDetails._id%>')">
-                <span style="font-size: 0.8rem;">Buy Now</span>
-              </div>
-              <div id="addToCart"
-                class="button-div rounded col-8 col-lg-6  p-2  d-flex align-items-center justify-content-center"
-                onclick="addToCart('<%=productDetails._id%>')">
-                <span style="font-size: 0.8rem;">Add to cart</span>
-              </div>
-            </div>
+            <% if(productDetails.stock=='0' ){%>
+              <p class="text-danger" style="font-weight: bold;">OUT OF STOCK</p>
+              </p>
+              <%}%>
+                <div class="buy-cart row text-center justify-content-around  p-0">
+                  <div id="buyNow"
+                    class="button-div rounded col-8 mb-2 mb-md-0  col-lg-5  p-2  d-flex align-items-center justify-content-center"
+                    onclick="buyNow('<%=productDetails._id%>')">
+                    <span style="font-size: 0.8rem;">Buy Now</span>
+                  </div>
+                  <div id="addToCart"
+                    class="button-div rounded col-8 col-lg-6  p-2  d-flex align-items-center justify-content-center"
+                    onclick="addToCart('<%=productDetails._id%>')">
+                    <span style="font-size: 0.8rem;">Add to cart</span>
+                  </div>
+                </div>
           </div>
         </div>
       </div>
@@ -180,9 +197,9 @@
           <div class="row my-3 justify-content-around">
             <div class="col-3 d-flex flex-column">
               <div class="description-heading">
-                <h6 class="fw-bold">Size</h6>
-                <p>
-                  <%=productDetails.size%>
+                <h6 class="fw-bold">Category</h6>
+                <p id="size">
+                  <%=productDetails.category.name%>
                 </p>
               </div>
             </div>
@@ -212,9 +229,9 @@
             </div>
             <div class="col-3 d-flex flex-column">
               <div class="description-heading">
-                <h6 class="fw-bold">Category</h6>
+                <h6 class="fw-bold">Sub-Category</h6>
                 <p>
-                  <%=productDetails.category.name%>
+                  <%=productDetails.subCategory%>
                 </p>
               </div>
             </div>
@@ -457,125 +474,85 @@
         </span>
       </div>
       <div class="copyright bg-theme py-2 text-center">
-        <span>Copyright © 2022 | SHOE ZONE | Made by <a href="https://rahulraveendrannp.github.io/">RAHUL NP</a></span>
+        <span>Copyright © 2023 | SHOE ZONE | Made by <a href="https://rahulraveendrannp.github.io/">RAHUL NP</a></span>
 
       </div>
     </footer>
     <style>
-      .slideshow-items {
-        width: 30vw;
-      }
+.product--size {
+  margin: 20px 0;
+  
+}
 
-      .slideshow-thumbnails {
-        width: 5vw;
-        margin-top: 5px;
-      }
+#shoesize{
+    display: inline-block;
+    width: 35px;
+    border: 1px solid #999;
+    border-radius: 4px 4px;
+    text-align: center;
+    padding: 1px 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+  
+  }
 
-      #slideshow-items-container {
-        display: inline-block;
-        position: relative;
-      }
+#shoesize.active{
+    color: #fff;
+    background: #008080;
+  }
 
-      #lens {
-        background-color: rgba(233, 233, 233, 0.4)
-      }
+#thumbimg {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
 
-      #lens,
-      #result {
-        position: absolute;
-        display: none;
-        z-index: 1;
-      }
 
-      .slideshow-items {
-        display: none;
-      }
+.img-display {
+  flex-grow: 1;
+  max-width: 372px;
+}
 
-      .slideshow-items.active {
-        display: block;
-      }
+.thumb {
+  opacity: .7;
+  margin: 0 .25rem .25rem 0;
+  transition: opacity .25s ease-out;
+  margin-top: 10px;
+}
 
-      .slideshow-thumbnails {
-        opacity: 0.5;
-      }
+.thumb:hover,
+.thumb.active {
+  opacity: 1;
+}
 
-      .slideshow-thumbnails.active {
-        opacity: 1;
-      }
-
-      #lens,
-      .slideshow-items,
-      .slideshow-thumbnails,
-      #result {
-        border: solid var(--light-grey-2) 1px;
-      }
+.zoom {
+  display: inline-block;
+}
     </style>
-
+    
     <script>
 
-      $(document).ready(function () {
+$(function() {
+  $('.zoom').zoom();
+  $('.thumb').on('click', 'a', function(e) {
+    e.preventDefault();
+    var thumb = $(e.delegateTarget);
+    if (!thumb.hasClass('active')) {
+      thumb.addClass('active').siblings().removeClass('active');
+      $('.zoom')
+        .zoom({
+          url: this.href
+        })
+        .find('img').attr('src', this.href);
+    }
+  });
+});
 
-        $('.slideshow-thumbnails').hover(function () { changeSlide($(this)); });
-
-        $(document).mousemove(function (e) {
-          var x = e.clientX; var y = e.clientY;
-
-          var x = e.clientX; var y = e.clientY;
-
-          var imgx1 = $('.slideshow-items.active').offset().left;
-          var imgx2 = $('.slideshow-items.active').outerWidth() + imgx1;
-          var imgy1 = $('.slideshow-items.active').offset().top;
-          var imgy2 = $('.slideshow-items.active').outerHeight() + imgy1;
-
-          if (x > imgx1 && x < imgx2 && y > imgy1 && y < imgy2) {
-            $('#lens').show(); $('#result').show();
-            imageZoom($('.slideshow-items.active'), $('#result'), $('#lens'));
-          } else {
-            $('#lens').hide(); $('#result').hide();
-          }
-
-        });
-
-      });
-
-      function imageZoom(img, result, lens) {
-
-        result.width(img.innerWidth()); result.height(img.innerHeight());
-        lens.width(img.innerWidth() / 2); lens.height(img.innerHeight() / 2);
-
-        result.offset({ top: img.offset().top, left: img.offset().left + img.outerWidth() + 10 });
-
-        var cx = img.innerWidth() / lens.innerWidth(); var cy = img.innerHeight() / lens.innerHeight();
-
-        result.css('backgroundImage', 'url(' + img.attr('src') + ')');
-        result.css('backgroundSize', img.width() * cx + 'px ' + img.height() * cy + 'px');
-
-        lens.mousemove(function (e) { moveLens(e); });
-        img.mousemove(function (e) { moveLens(e); });
-        lens.on('touchmove', function () { moveLens(); })
-        img.on('touchmove', function () { moveLens(); })
-
-        function moveLens(e) {
-          var x = e.clientX - lens.outerWidth() / 2;
-          var y = e.clientY - lens.outerHeight() / 2;
-          if (x > img.outerWidth() + img.offset().left - lens.outerWidth()) { x = img.outerWidth() + img.offset().left - lens.outerWidth(); }
-          if (x < img.offset().left) { x = img.offset().left; }
-          if (y > img.outerHeight() + img.offset().top - lens.outerHeight()) { y = img.outerHeight() + img.offset().top - lens.outerHeight(); }
-          if (y < img.offset().top) { y = img.offset().top; }
-          lens.offset({ top: y, left: x });
-          result.css('backgroundPosition', '-' + (x - img.offset().left) * cx + 'px -' + (y - img.offset().top) * cy + 'px');
-        }
-      }
-
-
-      function changeSlide(elm) {
-        $('.slideshow-items').removeClass('active');
-        $('.slideshow-items').eq(elm.index()).addClass('active');
-        $('.slideshow-thumbnails').removeClass('active');
-        $('.slideshow-thumbnails').eq(elm.index()).addClass('active');
-      }
-
-
+var sizes = jQuery(".product--size").find("span");
+sizes.click(function() {
+  sizes.removeClass("active");
+  $(this).addClass("active");
+});
     </script>
     <script src="/public/js/singleProduct.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -583,6 +560,9 @@
       crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+    
 </body>
 
 </html>

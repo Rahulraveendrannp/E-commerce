@@ -1,5 +1,8 @@
 const moment = require("moment");
-const orderCollection = require("../../models/user/orders")
+const orderCollection = require("../../models/user/orders");
+const productCollection= require("../../models/admin/product");
+
+
 exports.viewPage = async (req, res) => {
     try {
         allOrders = await orderCollection
@@ -42,12 +45,19 @@ exports.details=async(req,res)=>{
 
 
 exports.cancel = async (req, res) => {
+  const currentOrder = await orderCollection
+      .findById(req.params.id)
     await orderCollection.findByIdAndUpdate(req.params.id, {
       $set: {
         status: 'Cancelled',
         deliveredOn: null
       }
     })
+   currentOrder.summary.forEach(async(ele) => {
+      console.log("here")
+      await productCollection.updateOne({_id:ele.product},{$inc:{stock:ele.quantity}})
+      
+    });
     res.json({
       success: 'cancelled'
     })
@@ -63,14 +73,14 @@ exports.return=async(req,res)=>{
       console.log(deliverdDate.getTime());
       
       const currentDate=new Date();
-      console.log(currentDate.getTime());
-      console.log(currentDate-deliverdDate);
       if(currentDate-deliverdDate < 7*24*60*60*1000){
         await orderCollection.findByIdAndUpdate(req.params.id, {
           $set: {
             status: 'return-requested',
           }
         })
+        
+        
         res.json({
           success: 'return'
         })

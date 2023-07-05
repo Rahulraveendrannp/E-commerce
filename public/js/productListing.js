@@ -9,8 +9,8 @@ function filter(filterBy){
         },
         success:(res)=>{
             if(res.success == "clear"){
-                $("#productContainer").load(location.href + " #productContainer");
-                  $("#searchInput").val("");
+                $("#listingpage").load(location.href + " #listingpage");
+                $("#searchInput").val("");
             }else{
             Swal.fire({
                 toast: true,
@@ -21,7 +21,8 @@ function filter(filterBy){
                 animation: true,
                 title: "Filtered",
               });
-              $("#productContainer").load(location.href + " #productContainer");
+              $("#listingpage").load(location.href + " #listingpage");
+              
               if (res.success == 0) {
                 $("#searchInput").val("");
               }}
@@ -46,7 +47,7 @@ function sortBy(order) {
             animation: true,
             title: "Sorted",
           });
-          $("#productContainer").load(location.href + " #productContainer");
+          $("#listingpage").load(location.href + " #listingpage");
         }
       },
     });

@@ -74,15 +74,6 @@
       </select>
     </div> 
     <div class="mb-3 col-lg-6" >
-      <select id="size" class="form-control" name="size"  required> 
-        <option value="<%=product.size%>" class="fw-bold" selected><%=product.size%></option>       
-          <option value="6" style="color: rgb(71, 68, 68);">6</option> 
-          <option value="7" style="color: rgb(71, 68, 68);">7</option> 
-          <option value="8" style="color: rgb(71, 68, 68);">8</option> 
-          <option value="9" style="color: rgb(71, 68, 68);">9</option>        
-      </select>
-    </div>
-    <div class="mb-3 col-lg-6" >
       <select id="size" class="form-control" name="color"  required> 
         <option value="<%=product.size%>" class="fw-bold" selected><%=product.color%></option>       
         <option style="color: rgb(66, 61, 61);" value="black">Black</option> 
@@ -100,12 +91,24 @@
       </select>
     </div>
     <div class="mb-3 col-lg-6">
-    <label for="Price" class="px-1" style="font-size: 0.75rem;">Price</label>  
+      <label for="Price" class="px-1" style="font-size: 0.75rem;">Price</label>  
+          <input
+            type="number"
+            class="form-control"
+            id="Price"
+            placeholder="Price"
+            name="initialPrice"
+            value="<%= product.initialPrice %>"
+            required
+          />
+        </div>
+    <div class="mb-3 col-lg-6">
+    <label for="Price" class="px-1" style="font-size: 0.75rem;">Offer Price</label>  
         <input
           type="number"
           class="form-control"
           id="Price"
-          placeholder="Price"
+          placeholder="Offer Price"
           name="price"
           value="<%= product.price %>"
           required

@@ -21,8 +21,8 @@
     <link rel="shortcut icon" type="image/jpg" href="/public/image/Sole .png" />
     <title>SHOE ZONE</title>
   </head>
-  <body>
-    <header style="z-index: 10">
+  <body >
+    <header style="z-index: 10;background: linear-gradient(316deg, #1a0116 0%, #000811 74%);" >
       <div class="container-fluid header-top">
         <div class="container d-flex header-top-links justify-content-end">
           <a class="px-2 d-none d-lg-block" href="">Contact Us</a>
@@ -164,7 +164,7 @@
         </div>
       </nav>
     </header>
-    <section class="container mx-auto">
+    <section class=" mx-auto" style="background-color: transparent;">
       <!-- Banner -->
       <!-- Carousel wrapper -->
       <%if (banners!=null){%>
@@ -179,35 +179,13 @@
           <!-- Single item -->
           <%banners.forEach(banner => {%>
           <div class="carousel-item active">
-            <!-- <video class="img-fluid" autoplay loop muted>
-              <source src="<%=banner.videoURL%>" type="video/mp4" />
-            </video> -->
+ 
             <img src="/Public/image/banners/<%=banner.image%>" class="img-fluid" alt="">
             <a href="/<%=banner.url%>">
-              <!-- <div
-                class="carousel-caption d-lg-block d-none"
-                style="position: absolute; top: 40%"
-              >
-                <h3 style="text-shadow: 2px 2px #1d1919; font-size: 1.7rem;color: #000000;font-weight: bold;">
-                  <%=banner.title%>
-                </h3>
-                <p style="text-shadow: 1px 1px #7c7c7c; font-size: 1rem">
-                  <%=banner.description%>
-                </p>
-              </div> -->
+              
             </a>
             <a href="/<%=banner.url%>">
-              <div
-                class="carousel-caption d-block d-lg-none"
-                style="position: absolute"
-              >
-                <h3 style="text-shadow: 1px 1px #631313; font-size: 0.8rem">
-                  <%=banner.title%>
-                </h3>
-                <p style="text-shadow: 1px 1px #7c7c7c; font-size: 0.5rem">
-                  <%=banner.description%>
-                </p>
-              </div>
+      
             </a>
           </div>
           <%})%>
@@ -377,6 +355,20 @@
         >
       </div>
     </section>
+    <div class="conatiner-fluid backgroundImg-row backgroundImg">
+      <div class="row d-flex w-100 py-5 justify-content-center">
+        <div class="col-md-6"></div>
+        <div class="col-12 col-md-6" style="padding-left: 31px;">
+          <div><p class="writings">We care about every step you take,<br>
+            &amp; We will continue to present untill the finish line</p></div>
+            <div class="d-flex ">
+              <div><a href="products?category=collection"><button class="btn shopNow">SHOP NOW</button></a></div>
+              <div class="mx-4"><a href="/users/signup"><button class="btn shopNow">SIGN UP</button></a></div>
+            </div> 
+        </div>
+        
+      </div>
+    </div>
     <footer class="bg-theme">
       <div
         class="container links pt-4 pb-2 row mx-auto  d-flex justify-content-around"

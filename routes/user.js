@@ -15,6 +15,7 @@ const address=require("../controllers/user/address");
 const reviews=require("../controllers/user/review");
 const orders=require("../controllers/user/order");
 const objectIdCheck=require("../middlewares/users/objectIdCheck")
+const croppedImgupload=require("../utilities/croppedImgUpload")
 
 
 
@@ -75,8 +76,9 @@ router
 router
   .route("/profile")
   .get(sessionCheck,profile.viewPage)
-  .post(sessionCheck,imageUpload.single("photo"),imageProcessor.userProfilePic,profile.upadteUser)
+  .post(sessionCheck,croppedImgupload.single("photo"),profile.upadteUser)
 
+ 
 
 // Checkout
 router
@@ -86,6 +88,12 @@ router
   .post(sessionCheck,checkout.checkout)
 
 router.get("/cart/checkout/:id",  checkout.result);
+
+router.post("/cart/checkout/:id",async(req,res)=>{
+     const transactionID=req.params.id;
+     console.log(transactionID)
+     res.redirect(`/users/cart/checkout/${transactionID}`)
+})
 
 router.post("/cart/checkout/changeDefaultAddress",sessionCheck,checkout.defaultAddress)
 

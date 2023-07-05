@@ -129,10 +129,10 @@
                     alt=""
                   />
                 </button>
-                <ul class="dropdown-menu" style="font-size: 0.75rem">
+                <ul class="dropdown-menu" style="font-size: 0.75rem;background-color: #000000;">
                   <li
                     class="dropdown-item border-bottom"
-                    style="pointer-events: none"
+                    style="pointer-events: none;color: aliceblue;"
                   >
                     <%=locals.currentUser.name%>
                   </li>
@@ -158,10 +158,10 @@
         </div>
       </nav>
     </header>
-    <section class="container mx-auto">
+    <section class="container mx-auto" id="listingpage">
       <% if(listingName != null){%>
       <div class="pb-2 d-lg-none  text-center my-3">
-        <span class="shadow-heading" style="font-size: 1.25rem"
+        <span class="shadow-heading" style="font-size: 1.25rem" id="listingname"
           ><%=listingName%></span
         >
       </div>
@@ -189,17 +189,14 @@
             <li>
               <span class="dropdown-item" onclick="filter('Formal')">Formal</span>
             </li>
-            <!-- <li>
-              <span class="dropdown-item" onclick="removeFilter('none')"
-                >NO Filter</span
-              >
-            </li> -->
+
           </ul>
         </div>
 
         <span
           class="shadow-heading d-none d-lg-block"
           style="font-size: 1.25rem"
+          id="listingname"
           ><%=listingName%></span
         >
 
@@ -295,14 +292,17 @@
           </div>
           <%})%>
         </div>
+        
         <span
-          ><a
+          >
+          <% if(listingName == "Our Collection"){%><a
           href="/products?category=moreCollection"
             class="btn btn-outline-dark py-2 px-3 mt-5"
             style="font-size: 0.75rem;background-color: #310e68;
             background-image: linear-gradient(316deg, #310e68 0%, #5f0f40 74%);"
             >VIEW MORE</a
-          ></span
+          >
+          <%}%></span
         >
         <%}%>
       </div>

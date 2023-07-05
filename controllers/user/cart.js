@@ -119,7 +119,6 @@ exports.countChange = async (req, res) => {
     const productID = req.body.id;
     const count = Number(req.body.count);
     const product = await productCollection.findById(productID);
-    console.log(count * product.price)
     await cartCollection.findOneAndUpdate({
       customer: req.session.userID,
       products: { $elemMatch: { name: new mongoose.Types.ObjectId(req.body.id) } }

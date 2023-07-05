@@ -1,16 +1,19 @@
 const couponCollection=require("../../models/admin/coupons");
-const moment=require("moment")
+const moment=require("moment");
+const categoryCollection=require("../../models/admin/category")
 
 
 exports.viewPage=async(req,res)=>{
     try{
         const coupons = await couponCollection.find();
+        const categories=await categoryCollection.find()
 
     res.render("admin/partials/coupons", {
       session: req.session.admin,
       documentTitle: "Coupon Management",
       coupons,
       moment,
+      categories
     });
 
     }catch(error){
