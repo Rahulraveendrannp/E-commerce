@@ -21,7 +21,11 @@ exports.download = async (req, res) => {
         let total = 0;
         let reportPrice = 0;
         const salesdata = await orderCollection
-            .find()
+            .find({orderedOn:{
+              $lte:new Date(req.body.todate),
+              $gte:new Date(req.body.fromdate)
+
+            }})
             .populate({ path: "customer", select: "name" });
      salesdata.forEach((sale,i)=>{
         const date = moment(sale.orderedOn).format("lll");

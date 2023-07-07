@@ -18,7 +18,7 @@ exports.ourCollection=async(req,res)=>{
         }
         
         if(collectionId=='collection' && !req.session.sorted && !req.session.filter && !req.session.searched){
-          listing= await productCollection.find({listed:true}).populate("brand").limit(9);
+          listing= await productCollection.find({listed:true}).populate("brand").limit(12);
           req.session.listing=listing;
           listingName="Our Collection"
         }

@@ -29,7 +29,7 @@ exports.viewAll = async (req, res) => {
         kids.push(product)
       }
     })
-
+   men=men.slice(0,8)
     res.render("index/landingPage", {
       session: req.session.userID,
       currentUser,

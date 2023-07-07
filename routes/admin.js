@@ -12,7 +12,9 @@ const coupon =require("../controllers/admin/coupon");
 const orders=require("../controllers/admin/orders");
 const objectIdCheck=require("../middlewares/admin/objectIdCheck")
 const sessionCheck=require("../middlewares/admin/sessionCheck");
-const salesReport=require("../controllers/admin/salesReport")
+const salesReport=require("../controllers/admin/salesReport");
+const productManager=require("../controllers/admin/productManager");
+const signOut=require("../controllers/admin/signOut");
 
 
 
@@ -35,7 +37,7 @@ router.get("/chart/:id",dashboard.customChartData)
 // Sales Report
 router
    .route("/salesReport")
-   .get(sessionCheck,salesReport.download);
+   .post(sessionCheck,salesReport.download);
 
 
 // CustomerManagement
@@ -121,6 +123,21 @@ router
 router
      .route("/orders/:id")
      .get(sessionCheck,objectIdCheck, orders.detailsPage);
+
+//product Managmnet
+
+router
+     .route("/productManager_management")
+     .get(productManager.viewAll)
+     .post(productManager.addNew)
+     .patch(productManager.update)
+
+router.delete("/productManager_management/:id",productManager.delete)
+
+//signout
+router
+  .route("/signOut")
+  .get(sessionCheck, signOut.signOut);
 
  module.exports=router
   

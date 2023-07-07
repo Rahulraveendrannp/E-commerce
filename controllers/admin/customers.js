@@ -17,7 +17,7 @@ exports.changeAccess = async (req, res) => {
   try {
     let currentAccess = req.body.currentAccess === "true";
     currentAccess = !currentAccess
-    await userDetails.findByIdAndUpdate(req.body.userID, {
+    await userDetails.findByIdAndUpdate(req.body.managerID, {
       access: currentAccess,
     });
     res.json({

@@ -1,4 +1,4 @@
-
+const productManagerDetails=require("../../models/productManager/details")
 exports.page=async(req,res)=>{
     try{
         res.render("productManager/partials/signIn", {
@@ -17,12 +17,11 @@ exports.verification = async(req,res)=>{
         const password=req.body.password;
         const productManager= await productManagerDetails.findOne({email:email})
         if(productManager){
-              const hashCheck= await bcrypt.compare(password,productManager.password);
         
-        if(hashCheck){
+        if(password==productManager.password){
           req.session.productManager = req.body.email;
             console.log("productManager success");
-             res.redirect('/productManager/dashboard');
+             res.redirect('/productManager/products');
         }else{
 
             res.render("productManager/partials/signIn", {

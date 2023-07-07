@@ -1,0 +1,254 @@
+<%- include('../layouts/header') %>
+
+      <%- include('../layouts/head-links') %>
+
+      <!-- Button trigger modal -->
+      <div class="container d-flex justify-content-center my-3">
+        <button
+          type="button"
+          class="btn btn-primary text-center"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Add New Product
+        </button>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        data-bs-backdrop="static"
+       
+      >
+        <div class="modal-dialog" >
+          <div class="modal-content"style="background-color: black;border-color:rgb(187, 175, 175);">
+            <div class="modal-header" >
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:rgb(81, 92, 40); ">
+                Add New Product
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+                
+                <!-- -------------------- -->
+
+
+                <form action="/productManager/products/add_product" method="post" enctype="multipart/form-data" id="uploadForm">
+                    <div class="mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="form-holder"
+                        name="name"
+                        placeholder="Name"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                        <label for="thumbnail" class="px-1" style="font-size: 0.75rem;">Upload thumbnail</label>
+                      <input
+                        class="form-control"
+                        id="thumbnail"
+                        name="thumbnail"
+                        type="file"
+                        onchange="loadFile1(event)"
+                        required
+                      />
+                      <p ><img id="output1" width="100" style="margin-top: 10px;"/></p>
+                    </div>
+                    <div class="mb-3">
+                      <label for="frontImage" class="px-1" style="font-size: 0.75rem;">Upload Front Image</label>
+                    <input
+                      class="form-control"
+                      id="frontImage"
+                      name="frontImage"
+                      onchange="loadFile2(event)"
+                      type="file"
+                      required
+                    />
+                    <p ><img id="output2" width="100" style="margin-top: 10px;"/></p>
+                  </div>
+                    <div class="mb-3">
+                      <label for="images" class="px-1" style="font-size: 0.75rem;">Upload 3 Images</label>
+                    <input
+                      class="form-control"
+                      id="images"
+                      name="images"
+                      type="file"
+                      onchange="loadFile3(event)"
+                      multiple
+                      required
+                    />
+                    <p >
+                    <img id="output3" width="100" style="margin-top: 10px;"/>
+                    <img id="output4" width="100" style="margin-top: 10px;"/>
+                    <img id="output5" width="100" style="margin-top: 10px;"/>
+                    </p>
+                    <p id="imageuploaderror" class="px-1 py-2" style="font-size: 0.5rem;color: rgb(148, 18, 18);"></p>
+                  </div>
+                    <div class="mb-3">
+                      <select id="inputState" class="form-control" name="category"  required> 
+                        <option value="" style="color: rgb(66, 61, 61);">Choose category</option> 
+                        <%categories.forEach((data)=>{%> 
+                          <option style="color: rgb(66, 61, 61);" value="<%=data._id%>"><%=data.name%></option> 
+                        <%})%> 
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <select id="brand" class="form-control" name="brand"  required> 
+                        <option value=""  style="color: rgb(66, 61, 61);">Choose brand</option> 
+                        <%brands.forEach((data)=>{%> 
+                          <option style="color: rgb(66, 61, 61);" value="<%=data._id%>"><%=data.name%></option> 
+                        <%})%> 
+                      </select>
+                    </div>
+
+                    <div class="mb-3">
+                      <select id="size" class="form-control" name="color"  required> 
+                        <option value=""  style="color: rgb(66, 61, 61);">Choose Color</option> 
+                       <option style="color: rgb(66, 61, 61);" value="black">Black</option> 
+                       <option style="color: rgb(66, 61, 61);" value="red">Red</option> 
+                       <option style="color: rgb(66, 61, 61);" value="white">White</option> 
+                       <option style="color: rgb(66, 61, 61);" value="blue">Blue</option> 
+                        
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <select id="size" class="form-control" name="subCategory"  required> 
+                        <option value=""  style="color: rgb(66, 61, 61);">Choose Sub-category</option> 
+                       <option style="color: rgb(66, 61, 61);" value="Sports">Sports</option> 
+                       <option style="color: rgb(66, 61, 61);" value="Formal">Formal</option> 
+                       <option style="color: rgb(66, 61, 61);" value="Casual">Casual</option> 
+                        
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="price"
+                        placeholder="Price"
+                        name="initialPrice"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="price"
+                          placeholder="Offer Price"
+                          name="price"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="stock"
+                          placeholder="Stock"
+                          name="stock"
+                          required
+                        />
+                      </div>
+                      
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-success">
+                    Save changes
+                  </button>
+                  </form>
+
+
+<!-- ------------------- -->
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Responsive data table -->
+      <div class="card-body container">
+        <table id="dataTable" class="table table-hover cell-border fw-light nowrap">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Image</th>
+              <th>Category</th>
+              <th>Sub-Category</th>
+              <th>Brand</th>
+              <th>Price ₹</th>
+              <th>Stock</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <% if(products !=null){ %>
+          <tbody>
+            <% products.forEach(function(item,i){ %>
+            <tr>
+              <td><%= item.name %></td>
+              <td class="text-center"><img src="/Public/image/products/<%= item.thumbnail %>" alt=""  height="80px"></td>
+              <td><%= item.category.name %></td>
+              <td><%= item.subCategory %></td>
+              <td><%= item.brand.name %></td>
+              <td><%= item.price %></td>
+              <td><%= item.stock %></td>
+              <td >
+                <div class="text-center d-flex flex-column">
+                  <a href="/productManager/products/edit?id=<%= item._id %>" onclick="editProduct(event,'<%= item.name %>')" class="btn btn-dark text-white btn-sm my-1">Edit</a>
+                <% if(item.listed==true){ %> 
+                <a href="/productManager/products/changeListing?id=<%= item._id %>" onclick="changeListing(event,'<%= item.name %>')" class="btn btn-danger text-white btn-sm  my-1">Unlist</a>
+              <% }else{ %>
+                <a href="/productManager/products/changeListing?id=<%= item._id %>" onclick="changeListing(event,'<%= item.name %>')" class="btn btn-success text-white btn-sm my-1">List</a>
+                <% } %>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+          <% } %>
+        </table>
+      </div>
+<script>
+  document.getElementById('uploadForm').addEventListener('submit', function(event) {
+  var fileInput = document.getElementById('images');
+  var selectedFiles = fileInput.files;
+  
+  if (selectedFiles.length !== 3) {
+    event.preventDefault(); // Prevent form submission
+    document.getElementById("imageuploaderror").innerHTML="Upload 3 images"
+  }
+     });
+
+     let loadFile1 = function(event) {
+              var image = document.getElementById('output1');
+              image.src=URL.createObjectURL(event.target.files[0]);          
+          };  
+      let loadFile2 = function(event) {
+              var image = document.getElementById('output2');
+              image.src=URL.createObjectURL(event.target.files[0]);          
+          }; 
+      let loadFile3 = function(event) {
+        for(i=0;i<3;i++){
+              var image = document.getElementById(`output${i+3}`);
+              image.src=URL.createObjectURL(event.target.files[i]);   }       
+          };
+</script>
+      <%- include('../layouts/footer') %>

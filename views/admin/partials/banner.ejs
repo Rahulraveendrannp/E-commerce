@@ -71,15 +71,6 @@
                           name="description"
                         />
                       </div>
-                      <div class="mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="form-holder"
-                          placeholder="Video URL"
-                          name="videoURL"
-                        />
-                      </div>
                 </div>
                 <div class="modal-footer">
                   <button
@@ -110,8 +101,6 @@
               <th style="width: 20%">Action</th>
               <th>Description</th>
               <th>Image</th>
-              <!-- <th>URL</th> -->
-              <th>Video</th>
             </tr>
           </thead>
           <tbody id="tableBody">
@@ -141,9 +130,6 @@
               </td>
               <td><%= item.description %></td>
               <td><%if(item.image){%><%= item.image %><%}else{%>None<%}%></td>
-              <!-- <td><%if(item.url){%><%= item.url %><%}else{%>None<%}%></td> -->
-              <td><%if(item.videoURL){%><a href="<%= item.videoURL %>" target="_blank"><b class="text-primary">Video Link</b></a><%}else{%>None<%}%></td>
-              
             </tr>
             <% }) %>
           </tbody>

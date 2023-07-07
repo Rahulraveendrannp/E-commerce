@@ -1,0 +1,159 @@
+<%- include('../layouts/header') %> <%- include('../layouts/head-links') %>
+<div class="container " style="text-decoration: none">
+<form action="" method="post" enctype="multipart/form-data" class="container row flex-column my-5 mx-auto">
+    <div class="mb-3 col-lg-6">
+      <label for="name" class="px-1" style="font-size: 0.75rem;">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        value="<%= product.name %>"
+        name="name"
+        placeholder="Name"
+      />
+    </div>
+    <div class="mb-3 col-lg-6 d-flex flex-column">
+        <label for="thumbnail" class="px-1" style="font-size: 0.75rem;">Upload Thumbnail</label>
+        <img class=" border" src="/Public/image/products/<%=product.thumbnail%>" width="150px"  alt="" id="output1">
+      <input
+        class="form-control"
+        id="thumbnail"
+        name="thumbnail"
+        style="margin-top: 10px;"
+        onchange="loadFile1(event)"
+        type="file"
+      />
+    </div>
+    <div class="mb-3 col-lg-6 d-flex flex-column">
+      <label for="frontImage" class="px-1" style="font-size: 0.75rem;">Upload front image</label>
+      <img class=" border" src="/Public/image/products/<%=product.frontImage%>" width="150px"  alt="" id="output2">
+    <input
+      class="form-control"
+      id="frontImage"
+      name="frontImage"
+      style="margin-top: 10px;"
+      onchange="loadFile2(event)"
+      type="file"
+    />
+  </div>
+  <div class="mb-3 col-lg-6 d-flex flex-column">
+    <label for="frontImage" class="px-1" style="font-size: 0.75rem;">Upload images (Only 3)</label>
+    <div class="row">
+      <%product.images.forEach((image,i)=>{%>
+      <img class="col-8 col-lg-4 border" src="/Public/image/products/<%=image%>"
+       width="150px" 
+       alt="" 
+       id="changeimg<%=i%>"
+       >
+       <%})%>
+    </div>
+  <input
+    class="form-control"
+    id="frontImage"
+    name="images"
+    type="file"
+    style="margin-top: 10px;"
+    onchange="loadFile3(event)"
+    multiple
+  />
+</div>
+    <div class="mb-3 col-lg-6" >
+      <select id="inputState" class="form-control" name="category"  required> 
+        <option value="<%=product.category._id%>" class="fw-bold" selected><%=product.category.name%></option> 
+        <%categories.forEach((data)=>{%> 
+          <option value="<%=data._id%>" style="color: rgb(71, 68, 68);"><%=data.name%></option> 
+        <%})%> 
+      </select>
+    </div>
+    <div class="mb-3 col-lg-6" >
+      <select id="brand" class="form-control" name="brand"  required> 
+        <option value="<%=product.brand._id%>" class="fw-bold" selected ><%=product.brand.name%></option> 
+        <%brands.forEach((data)=>{%> 
+          <option value="<%=data._id%>" style="color: rgb(71, 68, 68);"><%=data.name%></option> 
+        <%})%> 
+      </select>
+    </div> 
+    <div class="mb-3 col-lg-6" >
+      <select id="size" class="form-control" name="color"  required> 
+        <option value="<%=product.size%>" class="fw-bold" selected><%=product.color%></option>       
+        <option style="color: rgb(66, 61, 61);" value="black">Black</option> 
+        <option style="color: rgb(66, 61, 61);" value="red">Red</option> 
+        <option style="color: rgb(66, 61, 61);" value="white">White</option> 
+        <option style="color: rgb(66, 61, 61);" value="blue">Blue</option>         
+      </select>
+    </div>
+    <div class="mb-3 col-lg-6" >
+      <select id="size" class="form-control" name="subCategory"  required> 
+        <option value="<%=product.subCategory%>" class="fw-bold" selected><%=product.subCategory%></option>       
+        <option style="color: rgb(66, 61, 61);" value="Sports">Sports</option> 
+        <option style="color: rgb(66, 61, 61);" value="Formal">Formal</option> 
+        <option style="color: rgb(66, 61, 61);" value="Casual">Casual</option>         
+      </select>
+    </div>
+    <div class="mb-3 col-lg-6">
+      <label for="Price" class="px-1" style="font-size: 0.75rem;">Price</label>  
+          <input
+            type="number"
+            class="form-control"
+            id="Price"
+            placeholder="Price"
+            name="initialPrice"
+            value="<%= product.initialPrice %>"
+            required
+          />
+        </div>
+    <div class="mb-3 col-lg-6">
+    <label for="Price" class="px-1" style="font-size: 0.75rem;">Offer Price</label>  
+        <input
+          type="number"
+          class="form-control"
+          id="Price"
+          placeholder="Offer Price"
+          name="price"
+          value="<%= product.price %>"
+          required
+        />
+      </div>
+      <div class="mb-3 col-lg-6">
+        <label for="Stock" class="px-1" style="font-size: 0.75rem;">Stock</label>  
+            <input
+              type="number"
+              class="form-control"
+              id="Stock"
+              placeholder="Stock"
+              name="stock"
+              value="<%= product.stock %>"
+              required
+            />
+          </div>
+     
+      
+     
+   
+      <div class="float-end mb-5">
+        <a href="/productManager/products" onclick="return confirm('Discard Changes ?')" class="btn btn-secondary text-white my-1">Cancel</a>
+        <button type="submit" class="btn btn-success my-1">
+          <span>Save changes</span>
+        </button>
+        </form>
+      </div>
+</div>
+
+<script>
+
+let loadFile3= function(event) {
+        for(i=0;i<event.target.files.length;i++){
+              var image = document.getElementById(`changeimg${i}`);
+              image.src=URL.createObjectURL(event.target.files[i]);   }       
+          };
+let loadFile1= function(event) {      
+              var image = document.getElementById("output1");
+              image.src=URL.createObjectURL(event.target.files[0]);   } 
+let loadFile2= function(event) {      
+              var image = document.getElementById("output2");
+              image.src=URL.createObjectURL(event.target.files[0]);   }      
+         
+
+</script>
+
+  <%- include('../layouts/footer') %>

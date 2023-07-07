@@ -168,6 +168,7 @@ var table=  $("#dataTable").DataTable({
   });
   // new $.fn.dataTable.FixedHeader( table );
 });
+
 //orders
 function deliverOrder(id, i) {
   $.ajax({
@@ -209,3 +210,47 @@ function printInvoice(divName) {
 
   document.body.innerHTML = originalContents;
 }
+
+// product manager
+function changeManagerAccess(id, access) {
+  $.ajax({
+    url: "/admin/productManager_management",
+    type: "patch",
+    data: {
+      managerID: id,
+      currentAccess: access,
+    },
+    success: (res) => {
+      $("#" + id).load(location.href + " #" + id);
+    },
+  });
+}
+
+function deleteManager(id) {
+  Swal.fire({
+    icon: 'question',
+    title:"<h5 style=color='white'>"+ `Proceed to delete ?`+"</h5>",
+    showCancelButton: true,
+    background:'#19191a',
+      iconColor:'blue',
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes'
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: "/admin/productManager_management/"+id,
+        type: "delete",
+        success: (res) => {
+          $("#" + id).load(location.href + " #" + id);
+        },
+      });
+    }
+  })
+
+}
+
+
+
+
+

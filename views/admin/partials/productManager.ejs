@@ -1,0 +1,142 @@
+<%- include('../layouts/header') %>
+
+      <%- include('../layouts/head-links') %>
+
+      <!-- Button trigger modal -->
+      <div class="container d-flex justify-content-center my-3">
+        <button
+          type="button"
+          class="btn btn-primary text-center"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Add New Manager
+        </button>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        data-bs-backdrop="static"
+       
+      >
+        <div class="modal-dialog" >
+          <div class="modal-content"style="background-color: black;border-color:rgb(187, 175, 175);">
+            <div class="modal-header" >
+              <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:rgb(124, 117, 121);font-weight: bolder;">
+                Add New Product Manager
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+                
+                <!-- -------------------- -->
+
+
+                <form action="/admin/productManager_management" method="post">
+                    <div class="mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="form-holder"
+                        name="name"
+                        placeholder="Name"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="form-holder"
+                          name="email"
+                          placeholder="Email"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="form-holder"
+                          name="password"
+                          placeholder="password"
+                          required
+                        />
+                      </div>
+                   
+                     
+                  
+                   
+                   
+                   
+                    
+                
+                      
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-success">
+                    Save changes
+                  </button>
+                  </form>
+
+
+<!-- ------------------- -->
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Responsive data table -->
+      <div class="card-body container">
+        <table id="dataTable" class="table table-hover cell-border fw-light nowrap">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+             
+              <th>Action</th>
+            </tr>
+          </thead>
+          <% if(allManagers !=null){ %>
+          <tbody>
+            <% allManagers .forEach(function(item,i){ %>
+            <tr>
+              <td><%= item.name %></td>
+              
+              <td><%= item.email %></td>
+              <td >
+                <div class="text-center d-flex flex-column" id="<%= item._id %>">
+                  <a href="#" onclick="deleteManager('<%= item._id %>')" class="btn btn-danger text-white btn-sm my-1" >Delete</a>
+                <% if(item.access==true){ %> 
+                <a href="#" onclick="changeManagerAccess('<%= item._id %>','<%= item.access %>')" class="btn btn-dark text-white btn-sm  my-1">Block</a>
+              <% }else{ %>
+                <a href="#" onclick="changeManagerAccess('<%= item._id %>','<%= item.access %>')" class="btn btn-success text-white btn-sm my-1">unBlock</a>
+                <% } %>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+          <% } %>
+        </table>
+      </div>
+
+      <%- include('../layouts/footer') %>

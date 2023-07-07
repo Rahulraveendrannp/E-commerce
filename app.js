@@ -3,7 +3,7 @@ const dotenv =require( "dotenv");
 const indexRouter =require( './routes/index');
 const userRouter  =require( './routes/user');
 const adminRouter =require( "./routes/admin");
-const vendorRouter=require("./routes/vendor")
+const productManagerRouter=require("./routes/productManager")
 const logger =require( 'morgan');
 const cookieParser =require('cookie-parser');
 const path =require('path');
@@ -46,7 +46,7 @@ app.use("/users", userRouter);
 
 app.use("/admin", adminRouter);
 
-app.use("/vendor", vendorRouter);
+app.use("/productManager", productManagerRouter);
 
 
 

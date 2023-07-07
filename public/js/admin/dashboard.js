@@ -131,7 +131,7 @@ $.ajax({
 
 
 
- 
+ // customChartData("none");
 
     function customChartData(data){
       $.ajax({
@@ -151,4 +151,9 @@ $.ajax({
       })
     
     }
-// customChartData("none");
+
+
+    // $("#dateSubmitBtn").click(()=>{
+    //   $('#datemodal').modal('toggle')
+
+    // })
