@@ -77,7 +77,17 @@
             style="background-color: #c4c1c1;"
           />
         </div>
-        <div class="d-flex align-items-center">
+        <div id="offer">
+        <% if(coupons!= null){ %>
+          <% coupons.forEach((coupon,i)=> {%>
+        <div class="d-flex" >
+          <input type="radio" id="<%= coupon._id %>" name="offer" onchange="offerCheck('<%= coupon._id %>')" value="<%= coupon.code %>">
+          <label for="<%= coupon._id %>" style="font-size: x-small;color: #d4beb7;margin-left: 10px;">Shoe zone <%= coupon.name %> offer <span style="color: #e20404;"><%= coupon.discount %>% </span> discount</label>
+        </div>
+        <%})%>
+      <%}%>
+    </div>
+        <div class="d-flex align-items-center mt-3">
         <button class=" btn btn-sm btn-primary"  onclick="checkCoupon(event)" style="width: 50px;height: 25px;font-size: small;">Apply</button>
         <span id="couponMessage" class=" px-2 rounded m-2">
         </span>
@@ -147,4 +157,20 @@
 </div>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="/public/js/user/coupon.js"></script>
+<script>
+  function offerCheck(id) {
+  $.ajax({
+    url:"/users/cart/checkout/offer/"+id,
+    method: "get",
+      success:(res)=>{
+        $("#couponDiscount").html(res.data.discountPrice);
+      $("#inputCouponDiscount").val(res.data.discountPrice);
+      $("#finalPrice").html(res.data.finalPrice);
+      $("#inputFinalPrice").val(res.data.finalPrice);
+     
+      }
+  })
+
+}
+</script>
 <%- include('../layouts/footer') %>

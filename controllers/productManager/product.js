@@ -3,6 +3,7 @@ const brandDetails=require("../../models/admin/brand");
 const productCollection=require("../../models/admin/product");
 const sharp=require("sharp");
 const mongoose = require("mongoose");
+const managerCollection=require("../../models/productManager/details")
 
 exports.viewPage=async(req,res)=>{
     try{
@@ -51,7 +52,9 @@ exports.addProduct=async(req,res)=>{
           req.body.images = imageArray;
           req.body.category=new mongoose.Types.ObjectId(req.body.category);
           req.body.brand= new mongoose.Types.ObjectId(req.body.brand);
-          const newProduct= new productCollection(req.body)
+          let prodcutManager=await  managerCollection.findOne({email:req.session.productManager});
+          req.body.updatedBy=prodcutManager._id;
+          const newProduct= new productCollection(req.body);
           await newProduct.save();
           console.log("Product added successfully");
           res.redirect("/productManager/products");
@@ -118,6 +121,9 @@ exports.edit = async (req, res) => {
           req.body.images = newArray;
         }
       }
+     
+      let prodcutManager=await  managerCollection.findOne({email:req.session.productManager})
+      req.body.updatedBy=prodcutManager._id
       req.body.category = new mongoose.Types.ObjectId(req.body.category);
       req.body.brand= new mongoose.Types.ObjectId(req.body.brand);
       await productCollection.findByIdAndUpdate(req.query.id, req.body);

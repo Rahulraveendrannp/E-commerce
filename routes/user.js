@@ -47,7 +47,7 @@ router
   .route("/forgotPassword")
   .get(forgotPassword.viewPage)
   .post(forgotPassword.emailVerification,forgotPassword.otpSend)
-  router.get("/forgotPassword/otpVerification/resend_OTP",forgotPassword.otpSend)
+router.get("/forgotPassword/otpVerification/resend_OTP",forgotPassword.otpSend)
 
 router.get("/forgotPassword/otpVerification", forgotPassword.otpPage);
 router.post("/forgotPassword/otpVerification", forgotPassword.otpVerification);
@@ -120,6 +120,10 @@ router
    .get(sessionCheck, objectIdCheck, orders.details)
    .patch(sessionCheck, objectIdCheck, orders.cancel)
    .put(sessionCheck, objectIdCheck, orders.return)
+
+//offer
+router.get("/cart/checkout/offer/:id",checkout.offer)
+
 
 // Sign out
 router.get("/signOut", sessionCheck,signOut);

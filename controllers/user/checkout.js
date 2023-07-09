@@ -24,6 +24,7 @@ exports.viewPage=async(req,res)=>{
             {$unwind:"$addresses"},
             {$match:{"addresses.primary":true}}
         ]);
+        let coupons= await couponCollection.find()
         if (defaultAddress != ""){
             defaultAddress = defaultAddress[0].addresses;
           } else {
@@ -34,6 +35,7 @@ exports.viewPage=async(req,res)=>{
             products,
             userCart,
             allAddresses,
+            coupons,
             documentTitle: "Checkout | SHOE ZONE",
           });}else {
             res.redirect("/users/cart");
@@ -157,11 +159,18 @@ exports.couponCheck=async(req,res)=>{
         }
       ]);
       shippingAddress = shippingAddress[0].addresses;
-    // Coupon used
+    // Coupon used 
       couponUsed= await couponCollection.findOne({
         code:req.body.couponCode,
         active:true,
       })
+      let offer=await couponCollection.findOne({
+        code:req.body.offer,
+        active:true,
+      })
+      if(offer){
+        couponUsed=offer
+      }
       
     if(couponUsed){
       const currentTime= new Date().toJSON();
@@ -381,3 +390,48 @@ exports.couponCheck=async(req,res)=>{
       console.log("error on rendering success page :" +error)
     }
   }
+
+
+exports.offer=async(req,res)=>{
+    try{
+        const id=req.params.id;
+        const userCart= await cartCollection.findOne({
+          customer:req.session.userID
+        });
+        const cartPrice= userCart.totalPrice;
+
+        const offer=await couponCollection.findById(id);
+        if(offer){
+
+               discountPercentage = offer.discount;
+                discountPrice = (discountPercentage / 100) * cartPrice;
+                discountPrice = Math.floor(discountPrice)
+                finalPrice = cartPrice - discountPrice;
+
+          res.json({
+            data: {
+              discountPrice,
+              discountPercentage,
+              finalPrice,
+            },
+          });
+
+        }else{
+
+          res.json({
+            data: {
+              discountPrice: 0,
+              discountPercentage: 0,
+              finalPrice: userCart.totalPrice,
+            },
+          });
+
+        }
+
+
+       
+
+    }catch(error){
+        console.log("eeror on chekcing offer :"+error)
+    }
+}

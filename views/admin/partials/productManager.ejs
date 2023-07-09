@@ -65,6 +65,20 @@
                       </div>
                       <div class="mb-3">
                         <input
+                          type="number"
+                          class="form-control"
+                          id="form-holder"
+                          name="phone"
+                          placeholder="Phone Number"
+                          pattern="[1-9]{1} [0-9]{9}"
+                          title="Enter Valid Phone Number"
+                          
+                          required
+                        />
+                      </div>
+                   
+                      <div class="mb-3">
+                        <input
                           type="text"
                           class="form-control"
                           id="form-holder"
@@ -74,13 +88,7 @@
                         />
                       </div>
                    
-                     
-                  
-                   
-                   
-                   
-                    
-                
+ 
                       
                 </div>
                 <div class="modal-footer">
@@ -105,12 +113,13 @@
       </div>
 
       <!-- Responsive data table -->
-      <div class="card-body container">
-        <table id="dataTable" class="table table-hover cell-border fw-light nowrap">
+      <div class="card-body container" id="managerTable">
+        <table id="dataTable" class="table table-hover cell-border fw-light nowrap"  >
           <thead>
             <tr>
               <th>Name</th>
               <th>Email</th>
+              <th>Phone</th>
              
               <th>Action</th>
             </tr>
@@ -122,6 +131,7 @@
               <td><%= item.name %></td>
               
               <td><%= item.email %></td>
+              <td><%= item.phone %></td>
               <td >
                 <div class="text-center d-flex flex-column" id="<%= item._id %>">
                   <a href="#" onclick="deleteManager('<%= item._id %>')" class="btn btn-danger text-white btn-sm my-1" >Delete</a>

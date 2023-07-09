@@ -14,6 +14,10 @@ const productManagerSchema = new mongoose.Schema({
       type: String,
       default:"manager1234"
     },
+    phone:{
+      type: Number,
+      unique: true,
+    },
     access: {
       type: Boolean,
         default: true,

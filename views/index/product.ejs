@@ -85,7 +85,7 @@
                       color: rgb(8, 8, 8);
                       font-weight: 600;
                     ">
-                  <img src="/Public/image/users/<%=locals.currentUser.photo%>" height="25px" alt="" />
+                  <img src="/Public/image/users/<%=locals.currentUser.photo%>" height="25px" alt="" class="rounded " />
                 </button>
                 <ul class="dropdown-menu" style="font-size: 0.75rem;background-color: black;">
                   <li class="dropdown-item border-bottom" style="pointer-events: none;color: aliceblue;">
@@ -133,17 +133,20 @@
             <div class="thumbnails col-2 " style="margin-left:10px;">
               <div class="thumb active ">
                 <a href="../../public/image/products/<%=productDetails.images[0] %>">
-                  <img src='../../public/image/products/<%=productDetails.images[0] %>' id="thumbimg" alt="thumb-air-force-right-side">
+                  <img src='../../public/image/products/<%=productDetails.images[0] %>' id="thumbimg"
+                    alt="thumb-air-force-right-side">
                 </a>
               </div>
               <div class="thumb">
                 <a href="../../public/image/products/<%=productDetails.images[1] %>">
-                  <img src="../../public/image/products/<%=productDetails.images[1] %>" id="thumbimg" alt="thumb-air-force-left-side">
+                  <img src="../../public/image/products/<%=productDetails.images[1] %>" id="thumbimg"
+                    alt="thumb-air-force-left-side">
                 </a>
               </div>
               <div class="thumb ">
                 <a href="../../public/image/products/<%=productDetails.images[2] %>">
-                  <img src="../../public/image/products/<%=productDetails.images[2] %>" id="thumbimg" alt="thumb-air-force-bottom-side">
+                  <img src="../../public/image/products/<%=productDetails.images[2] %>" id="thumbimg"
+                    alt="thumb-air-force-bottom-side">
                 </a>
               </div>
             </div>
@@ -161,7 +164,8 @@
               <%=productDetails.name%>
             </h3>
             <p class="shadow-details">Price: ₹<%=productDetails.price%>
-                <% if(productDetails.initialPrice){%> <s style="color: rgb(136, 125, 125);">₹<%=productDetails.initialPrice%></s>
+                <% if(productDetails.initialPrice){%> <s style="color: rgb(136, 125, 125);">₹
+                    <%=productDetails.initialPrice%></s>
                   <span style="color: rgb(233, 128, 86);">(<%=percentageOffer%>%)</span>
                   <%}%>
             </p>
@@ -412,10 +416,6 @@
               <button class=" btn btn-sm mb-3 col-lg-2 mb-4" id="addReview"
                 onclick="reviewAdd('<%=productDetails._id%>')">Add a review</button>
               <%}%>
-
-
-
-
                 <div class="text-center d-flex justify-content-center flex-column my-3" id="productContainer">
                   <div class=" text-center py-5">
                     <span class="shadow-heading" style="font-size: 1.3rem">SIMILAR PRODUCTS</span>
@@ -464,14 +464,16 @@
       <div class="row d-flex w-100 py-5 justify-content-center">
         <div class="col-md-6"></div>
         <div class="col-12 col-md-6" style="padding-left: 31px;">
-          <div><p class="writings">We care about every step you take,<br>
-            &amp; We will continue to present untill the finish line</p></div>
-            <div class="d-flex ">
-              <div><a href="products?category=collection"><button class="btn shopNow">SHOP NOW</button></a></div>
-              <div class="mx-4"><a href="/users/signup"><button class="btn shopNow">SIGN UP</button></a></div>
-            </div> 
+          <div>
+            <p class="writings">We care about every step you take,<br>
+              &amp; We will continue to present untill the finish line</p>
+          </div>
+          <div class="d-flex ">
+            <div><a href="products?category=collection"><button class="btn shopNow">SHOP NOW</button></a></div>
+            <div class="mx-4"><a href="/users/signup"><button class="btn shopNow">SIGN UP</button></a></div>
+          </div>
         </div>
-        
+
       </div>
     </div>
 
@@ -489,85 +491,86 @@
         </span>
       </div>
       <div class="copyright bg-theme py-2 text-center">
-        <span>Copyright © 2023 | SHOE ZONE | Made by <a href="https://rahulraveendrannp.github.io/">RAHUL NP</a></span>
+        <span>Copyright © 2023 | SHOE ZONE | Made by <a href="https://rahulraveendrannp.github.io/Portfolio/">RAHUL
+            NP</a></span>
 
       </div>
     </footer>
     <style>
-.product--size {
-  margin: 20px 0;
-  
-}
+      .product--size {
+        margin: 20px 0;
 
-#shoesize{
-    display: inline-block;
-    width: 35px;
-    border: 1px solid #999;
-    border-radius: 4px 4px;
-    text-align: center;
-    padding: 1px 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-  
-  }
+      }
 
-#shoesize.active{
-    color: #fff;
-    background: #008080;
-  }
+      #shoesize {
+        display: inline-block;
+        width: 35px;
+        border: 1px solid #999;
+        border-radius: 4px 4px;
+        text-align: center;
+        padding: 1px 2px;
+        text-transform: uppercase;
+        cursor: pointer;
 
-#thumbimg {
-  display: block;
-  height: auto;
-  max-width: 100%;
-}
+      }
+
+      #shoesize.active {
+        color: #fff;
+        background: #008080;
+      }
+
+      #thumbimg {
+        display: block;
+        height: auto;
+        max-width: 100%;
+      }
 
 
-.img-display {
-  flex-grow: 1;
-  max-width: 372px;
-}
+      .img-display {
+        flex-grow: 1;
+        max-width: 372px;
+      }
 
-.thumb {
-  opacity: .7;
-  margin: 0 .25rem .25rem 0;
-  transition: opacity .25s ease-out;
-  margin-top: 10px;
-}
+      .thumb {
+        opacity: .7;
+        margin: 0 .25rem .25rem 0;
+        transition: opacity .25s ease-out;
+        margin-top: 10px;
+      }
 
-.thumb:hover,
-.thumb.active {
-  opacity: 1;
-}
+      .thumb:hover,
+      .thumb.active {
+        opacity: 1;
+      }
 
-.zoom {
-  display: inline-block;
-}
+      .zoom {
+        display: inline-block;
+      }
     </style>
-    
+
     <script>
 
-$(function() {
-  $('.zoom').zoom();
-  $('.thumb').on('click', 'a', function(e) {
-    e.preventDefault();
-    var thumb = $(e.delegateTarget);
-    if (!thumb.hasClass('active')) {
-      thumb.addClass('active').siblings().removeClass('active');
-      $('.zoom')
-        .zoom({
-          url: this.href
-        })
-        .find('img').attr('src', this.href);
-    }
-  });
-});
+      $(function () {
+        $('.zoom').zoom();
+        $('.thumb').on('click', 'a', function (e) {
+          e.preventDefault();
+          var thumb = $(e.delegateTarget);
+          if (!thumb.hasClass('active')) {
+            thumb.addClass('active').siblings().removeClass('active');
+            $('.zoom')
+              .zoom({
+                url: this.href
+              })
+              .find('img').attr('src', this.href);
+          }
+        });
+      });
 
-var sizes = jQuery(".product--size").find("span");
-sizes.click(function() {
-  sizes.removeClass("active");
-  $(this).addClass("active");
-});
+      var sizes = jQuery(".product--size").find("span");
+      sizes.click(function () {
+        sizes.removeClass("active");
+        $(this).addClass("active");
+      });
     </script>
     <script src="/public/js/singleProduct.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -577,7 +580,7 @@ sizes.click(function() {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
-    
+
 </body>
 
 </html>

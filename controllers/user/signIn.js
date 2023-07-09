@@ -27,8 +27,12 @@ exports.signInPage =async (req, res) => {
             if(user.access==true){
                 if (hashedCheck) {
                     req.session.userID = user._id;
-                    console.log(req.session.redirectTo)
-                    res.redirect("back");
+                
+                    
+                      res.redirect("back");
+                    
+                    
+
                   } else {
                     res.render("user/partials/signIn", {
                       documentTitle: "User Sign In | SHOE ZONE",

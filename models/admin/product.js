@@ -46,6 +46,11 @@ const productSchema = new mongoose.Schema({
   offer:Number,
   stock: Number,
   listed: { type: Boolean, default: true },
+  updatedBy: {
+    type: mongoose.Types.ObjectId,
+    ref: "ProductManagerDetails",
+    default:null,
+  }
 });
 
 

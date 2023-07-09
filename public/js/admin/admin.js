@@ -242,7 +242,7 @@ function deleteManager(id) {
         url: "/admin/productManager_management/"+id,
         type: "delete",
         success: (res) => {
-          $("#" + id).load(location.href + " #" + id);
+          $("#managerTable").load(location.href + " #managerTable");
         },
       });
     }

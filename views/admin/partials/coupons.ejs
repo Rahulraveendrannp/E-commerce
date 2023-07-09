@@ -74,12 +74,14 @@
                       />
                     </div>
                     <div class="mb-3">
-                      <select id="inputState" class="form-control" name="category"  required> 
-                        <option value="" style="color: rgb(66, 61, 61);">Choose category</option> 
-                        <%categories.forEach((data)=>{%> 
-                          <option style="color: rgb(66, 61, 61);" value="<%=data._id%>"><%=data.name%></option> 
-                        <%})%> 
-                      </select>
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="form-holder"
+                      placeholder="Description"
+                      name="description"
+                      required
+                    />
                     </div>
                     <div class="mb-3">
                         <input
@@ -132,7 +134,7 @@
               <th>No.</th>
               <th>Name</th>
               <th>Code</th>
-              <th>Category</th>
+              <th>Description</th>
               <th>Discount</th>
               <th>Starting Date</th>
               <th>Expiry Date</th>
@@ -146,7 +148,7 @@
               <td><%= i+1 %></td>
               <td><%= item.name %></td>
               <td><%= item.code %></td>
-              <td><%= item.category %></td>
+              <td><%= item.description %></td>
               <td><%= item.discount %>%</td>
               <td><%= moment(item.startingDate).format('ll')  %></td>
               <td><%= moment(item.expiryDate).format('ll') %></td>

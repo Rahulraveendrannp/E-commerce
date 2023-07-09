@@ -14,6 +14,7 @@ $.ajax({
       $("#inputCouponDiscount").val(res.data.discountPrice);
       $("#finalPrice").html(res.data.finalPrice);
       $("#inputFinalPrice").val(res.data.finalPrice);
+      $("#offer").load(location.href + " #offer");
       }
 })
 

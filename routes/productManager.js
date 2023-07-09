@@ -7,7 +7,8 @@ const upload=require("../utilities/imageUpload");
 const brands=require("../controllers/productManager/brand");
 const orders=require("../controllers/productManager/orders");
 const objectIdCheck=require("../middlewares/productManager/objectIdCheck");
-const coupon=require("../controllers/productManager/coupon")
+const coupon=require("../controllers/productManager/coupon");
+const forgotPassword=require("../controllers/productManager/forgotPassword");
 
 
 
@@ -71,6 +72,18 @@ router
 router.get("/coupon_management/changeActivity",coupon.changeActivity);
 
 
+// Password Section
+router
+  .route("/forgotPassword")
+  .get(forgotPassword.viewPage)
+  .post(forgotPassword.emailVerification,forgotPassword.otpSend)
+router.get("/forgotPassword/otpVerification/resend_OTP",forgotPassword.otpSend)
+
+router.get("/forgotPassword/otpVerification", forgotPassword.otpPage);
+router.post("/forgotPassword/otpVerification", forgotPassword.otpVerification);
+
+router.get("/changePassword",forgotPassword.passwordChangePage);
+router.post("/changePassword",forgotPassword.updatePassword);
 
 
 
