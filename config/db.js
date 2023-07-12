@@ -1,12 +1,11 @@
 const mongoose=require("mongoose");
 
-
-mongoose.connect("mongodb://127.0.0.1/ShoeZone",{ 
+mongoose.connect(process.env.MONGO_URL,{ 
     useNewUrlParser:true,
     useUnifiedTopology:true,
     // useCreateIndex:true
 }).then(()=>{
     console.log('mongodb connction successful');
 }).catch((err)=>{
-    console.log('mongodb connction erroe' +err);
+    console.log('mongodb connction error :' +err);
 })

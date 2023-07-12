@@ -7,12 +7,12 @@ const productManagerRouter=require("./routes/productManager")
 const logger =require( 'morgan');
 const cookieParser =require('cookie-parser');
 const path =require('path');
+dotenv.config();
 require("./config/db");
 const session = require("express-session");
 
 
 const app = express();
-dotenv.config()
 // Log http request status
 app.use(logger('dev'));
 app.use(cookieParser());

@@ -15,7 +15,7 @@ exports.viewAll = async (req, res) => {
                                              .populate("category")
                                              .populate("brand").sort({_id:-1})
 // console.log(allProducts);
-   let newArrivals=allProducts.slice(0, 8);
+   let newArrivals=allProducts.slice(0, 4);
    let men=[]
    let women=[]
    let kids=[]
@@ -29,7 +29,8 @@ exports.viewAll = async (req, res) => {
         kids.push(product)
       }
     })
-   men=men.slice(0,8)
+   men=men.slice(0,4)
+   women=women.slice(0,4)
     res.render("index/landingPage", {
       session: req.session.userID,
       currentUser,

@@ -6,7 +6,7 @@ const wishlistCollection=require("../../models/user/wishlist");
 const nodemailer=require("nodemailer");
 const otpCollection=require("../../models/user/otp");
 const mongoose=require("mongoose");
-
+// const twilio=require("twilio")("ACe8cfe177051de281085051d8cca8d58d","1da4d73254d7202f55bd308346c2faee");
 
 
 
@@ -52,7 +52,6 @@ console.log("user registeratiion error"+error)
   }
 
 exports.sendOtp=async(req,res)=>{
-  console.log("sdsjkdhshd");
   try{
     if(req.session.newUserDetails){
     const email = req.session.newUserDetails.email;
@@ -90,6 +89,17 @@ exports.sendOtp=async(req,res)=>{
           console.log("Account creation OTP Sent: " + tempOTP);
         }
       });
+
+      //twilio
+
+      // twilio.messages.create({
+      //   from:process.env.Twilio_ph_no,
+      //   to: "+91"+req.session.newUserDetails.number ,
+      //   body: `<h1>OTP</h1></br><h2 style="text-color: red, font-weight: bold">${tempOTP}</h2></br><p>Enter the OTP to create account.</p>`
+      // }).then((res)=>{console.log("message sent by twilio")}).catch((err)=>{console.log("error :"+err)})
+
+      
+
       
       res.redirect("/users/otp_verification");
     
