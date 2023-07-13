@@ -17,18 +17,21 @@ Front-end is completely designed by using HTML, CSS, Bootsrap 5 and JavaScript w
 - Paypal payment integration
 - RazorPay integration
 - Product review
-- User profile picture
+- User profile picture with image cropping
 - Index:
   - Search, Sort and Filter using AJAX
   - Single product page
  - Category wise collection of products
 - Admin side:
   - Dashboard with graphs
+  - Order details download
   - Coupon Management
   - User Management
+  - Offer management
   - Product Management
   - Category Management
   - Banner Management
+  - Brand management
 - Shopper side:
   - Profile with custom avatar and image cropping
   - Cart 
