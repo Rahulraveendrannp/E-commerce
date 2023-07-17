@@ -10,7 +10,6 @@ exports.viewAll = async (req, res) => {
      currentUser = await userCollection.findById(req.session.userID);
     }
     const banners = await bannerCollection.find({ active: true }).limit(3).sort({title:1});
-
     const allProducts=await productCollection.find({listed:true})
                                              .populate("category")
                                              .populate("brand").sort({_id:-1})

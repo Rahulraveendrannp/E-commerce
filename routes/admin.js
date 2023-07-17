@@ -15,6 +15,8 @@ const sessionCheck=require("../middlewares/admin/sessionCheck");
 const salesReport=require("../controllers/admin/salesReport");
 const productManager=require("../controllers/admin/productManager");
 const signOut=require("../controllers/admin/signOut");
+const offer=require("../controllers/admin/offer");
+
 
 
 
@@ -113,6 +115,13 @@ router
      .post(sessionCheck,coupon.addNew)
 router.get("/coupon_management/changeActivity",coupon.changeActivity);
 
+//Offer mangement
+router
+    .route("/offers")
+    .get(sessionCheck,offer.viewPage)
+    .post(sessionCheck,offer.addNew)
+router.get("/offers/delete",offer.delete);
+
 // order management
 router
      .route("/orders")
@@ -139,5 +148,5 @@ router
   .route("/signOut")
   .get(sessionCheck, signOut.signOut);
 
- module.exports=router
+module.exports=router
   

@@ -11,7 +11,7 @@
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
-          Add New Coupon
+          Add New Offer
         </button>
       </div>
 
@@ -28,7 +28,7 @@
           <div class="modal-content" style="background-color: rgb(22, 21, 21);">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Add New Coupon
+                Add New Offer
               </h1>
               <button
                 type="button"
@@ -42,7 +42,7 @@
                 <!-- -------------------- -->
 
 
-                <form action="coupon_management" method="post">
+                <form action="offers" method="post">
                     <div class="mb-3">
                       <input
                         type="text"
@@ -53,16 +53,7 @@
                         required
                       />
                     </div>
-                    <div class="mb-3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="form-holder"
-                        name="code"
-                        placeholder="Code"
-                        required
-                      />
-                    </div>
+                  
                     <div class="mb-3">
                       <input
                         type="number"
@@ -74,14 +65,12 @@
                       />
                     </div>
                     <div class="mb-3">
-                      <input
-                      type="text"
-                      class="form-control"
-                      id="form-holder"
-                      placeholder="Quantity"
-                      name="qty"
-                      required
-                    />
+                      <select id="inputState" class="form-control" name="category"  required> 
+                        <option value="" style="color: rgb(66, 61, 61);">Choose category</option> 
+                        <%categories.forEach((data)=>{%> 
+                          <option value="<%=data._id%>" style="color: rgb(71, 68, 68);"><%=data.name%></option> 
+                        <%})%> 
+                      </select>
                     </div>
                     <div class="mb-3">
                         <input
@@ -133,31 +122,29 @@
             <tr>
               <th>No.</th>
               <th>Name</th>
-              <th>Code</th>
-              <th>Quantity</th>
+              <th>Category</th>
               <th>Discount</th>
               <th>Starting Date</th>
               <th>Expiry Date</th>
               <th>Activity</th>
             </tr>
           </thead>
-          <% if(coupons !=null){ %>
+          <% if(offers !=null){ %>
           <tbody>
-            <% coupons.forEach(function(item,i){ %>
+            <% offers.forEach(function(item,i){ %>
             <tr>
               <td><%= i+1 %></td>
               <td><%= item.name %></td>
-              <td><%= item.code %></td>
-              <td><%= item.qty %></td>
+              <td><%= item.category.name %></td>
               <td><%= item.discount %>%</td>
               <td><%= moment(item.startingDate).format('ll')  %></td>
               <td><%= moment(item.expiryDate).format('ll') %></td>
               <td class="text-center d-flex flex-column">
-                <% if(item.active==true){ %> 
-                <a href="/admin/coupon_management/changeActivity?id=<%= item._id %>"  class="btn btn-success text-white btn-sm  my-1">Active</a>
-              <% }else{ %>
-                <a href="/admin/coupon_management/changeActivity?id=<%= item._id %>"  class="btn btn-danger text-white btn-sm my-1">In-active</a>
-                <% } %></td>
+                
+               
+             
+                <a href="/admin/offers/delete?id=<%= item._id %>" onclick="return confirm('Continue Deleting Offer')" class="btn btn-danger text-white btn-sm my-1">Delete</a>
+               </td>
             </tr>
             <% }) %>
           </tbody>

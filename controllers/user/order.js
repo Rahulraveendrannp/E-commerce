@@ -1,13 +1,14 @@
 const moment = require("moment");
 const orderCollection = require("../../models/user/orders");
 const productCollection= require("../../models/admin/product");
+const couponCollection = require("../../models/admin/coupons");
 
 
 exports.viewPage = async (req, res) => {
     try {
         allOrders = await orderCollection
             .find({ customer: req.session.userID })
-            .sort({ _id: 1 })
+            .sort({ _id: -1 })
             .populate("customer")
             .populate("couponUsed")
         res.render("user/profile/partials/orders", {
@@ -53,10 +54,12 @@ exports.cancel = async (req, res) => {
         deliveredOn: null
       }
     })
+    await couponCollection.findByIdAndUpdate(currentOrder.couponUsed,{
+      $inc :{qty:1}
+    })
    currentOrder.summary.forEach(async(ele) => {
       console.log("here")
       await productCollection.updateOne({_id:ele.product},{$inc:{stock:ele.quantity}})
-      
     });
     res.json({
       success: 'cancelled'

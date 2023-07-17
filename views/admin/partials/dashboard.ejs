@@ -174,12 +174,12 @@ aria-labelledby="datemodalLabel" aria-hidden="true">
       <form action="/admin/salesReport" method="post" >
         <div class="mb-3">
           <label for="fromdate" style="font-size: 0.75rem">FROM</label>
-          <input type="date" class="form-control" id="fromdate" placeholder="From" name="fromdate"
+          <input type="date"  class="form-control date" id="fromdate" placeholder="From" name="fromdate"
           />
         </div>
         <div class="mb-3">
           <label for="todate" style="font-size: 0.75rem">TO</label>
-          <input type="date" class="form-control" id="todate" placeholder="to" name="todate" />
+          <input type="date"  class="form-control date" id="todate" placeholder="to" name="todate" onchange="return TDate()" />
         </div>
     </div>
     <div class="modal-footer">

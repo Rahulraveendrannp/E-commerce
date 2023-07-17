@@ -96,6 +96,7 @@ exports.couponCheck=async(req,res)=>{
           _id: req.session.userID,
           couponsUsed: coupon._id,
         });
+      if(coupon.qty !== 0){
         if(!alreadyUsedCoupon){
           if (coupon.active == true) {
             const currentTime=new Date().toJSON();
@@ -124,6 +125,8 @@ exports.couponCheck=async(req,res)=>{
 
         }else{
           couponCheck = "<b style='font-size:0.75rem;color: red'>Coupon already used !</b>";
+        } }else{
+          couponCheck = "<b style='font-size:0.75rem;color: red'>Coupon Finished !</b>"
         }
 
       }else{
@@ -331,6 +334,9 @@ exports.couponCheck=async(req,res)=>{
               orders:orderDetails._id,
               couponsUsed : couponUsed
             }
+          })
+          await couponCollection.findByIdAndUpdate(couponUsed,{
+            $inc :{qty:-1}
           })
         }else{
           await userCollection.findByIdAndUpdate(req.session.userID,{

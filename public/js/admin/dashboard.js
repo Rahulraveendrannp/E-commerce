@@ -157,3 +157,20 @@ $.ajax({
     //   $('#datemodal').modal('toggle')
 
     // })
+
+
+    function TDate() {
+      
+      var UserDate = document.getElementById("todate").value;
+      var ToDate = new Date();
+      console.log(new Date(UserDate).getTime() )
+      console.log(ToDate.getTime())
+      if (new Date(UserDate).getTime() > ToDate.getTime()) {
+        console.log("hjfhj")
+        $("#todate").val("")
+            alert("The Date must be Bigger or Equal to today date");
+            return false;
+       }
+      return true;
+  
+  }
