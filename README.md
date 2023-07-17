@@ -1,0 +1,50 @@
+# E-commerce
+E-commerce website-Shoe Zone 
+
+A fully fledged e-Commerce web application made using NodeJS, MongoDB, HTML, CSS and EJS view engine. 
+Front-end is completely designed by using HTML, CSS, Bootsrap 5 and JavaScript with mobile responsiveness.
+
+## Features - Dev
+
+- MVC Architecture
+- JavaScript and EJS view engine
+- NodeJS with Express.js
+- MongoDB with Mongoose
+- AJAX and JQuery
+- Bootstrap 5
+
+## Project Features
+- Paypal payment integration
+- RazorPay integration
+- Product review
+- User profile picture with image cropping
+- Index:
+  - Search, Sort and Filter using AJAX
+  - Single product page
+ - Category wise collection of products
+- Admin side:
+  - Dashboard with graphs
+  - Order details download
+  - Coupon Management
+  - User Management
+  - Offer management
+  - Product Management
+  - Category Management
+  - Banner Management
+  - Brand management
+- Shopper side:
+  - Profile with custom avatar and image cropping
+  - Cart 
+  - Wishlist
+  - Orders
+  - Place order with coupon and offers (AJAX)
+  - PayPal,Razorpay and COD options for payment
+  - Multiple Addresses
+
+### Third-Party Modules
+- momentjs for formatting time
+- Sweet alert 2
+- Sharp and multer modules for image.
+- ExcelJS for printing monthly reports of sales
+- ChartJS for bargraph and pie chart
+- bcrypt for hashing password
