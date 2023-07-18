@@ -12,6 +12,7 @@ require("./config/db");
 const session = require("express-session");
 
 
+
 const app = express();
 // Log http request status
 app.use(logger('dev'));
@@ -49,6 +50,17 @@ app.use("/admin", adminRouter);
 app.use("/productManager", productManagerRouter);
 
 
+// 404 Rendering
+const userCollection=require("./models/user/details")
+app.all("*", async (req, res) => {
+  const currentUser = await userCollection.findById(req.session.userID);
+  res.render("index/404", {
+    documentTitle: "404 | Page not found",
+    url: req.originalUrl,
+    session: req.session.userID,
+    currentUser,
+  });
+});
 
 
 // Create Server
@@ -57,6 +69,6 @@ app.listen(PORT, (err) => {
   if (err) {
     console.log("Error starting server: " + err);
   } else {
-    console.log("Listening on "+ PORT);
+    console.log(`Listening on https://shoezone.live`);
   }
 });

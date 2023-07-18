@@ -33,7 +33,7 @@ exports.addNew=async(req,res)=>{
         from:process.env.TRANSPORTER_USERNAME,
         to:req.body.email,
         subject: " SHOE ZONE eCommerce",
-        html: `<h1>Congrats </h1></br><h2 style="text-color: red, font-weight: bold">YOUR HAVE BEEN ADDED AS PRODUCT MANGER WITH </br>Default Password: ${req.body.password}</h2></br><p>Chnage password :</p>`,
+        html: `<h1>Congrats </h1></br><h2 style="text-color: red, font-weight: bold">YOUR HAVE BEEN ADDED AS PRODUCT MANGER WITH </br>Default Password: ${req.body.password}</h2></br><p>Chnage password : https://shoezone.live/productManager/forgotPassword</p>`,
       };
 
       // Send mail

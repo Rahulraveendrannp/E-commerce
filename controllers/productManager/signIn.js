@@ -16,19 +16,30 @@ exports.verification = async(req,res)=>{
         const email=req.body.email.toLowerCase();
         const password=req.body.password;
         const productManager= await productManagerDetails.findOne({email:email})
-        if(productManager){
-        
-        if(password==productManager.password){
-          req.session.productManager = req.body.email;
-            console.log("productManager success");
-             res.redirect('/productManager/products');
-        }else{
+        if(productManager){ 
+            if(productManager.access== true){
 
-            res.render("productManager/partials/signIn", {
-                documentTitle: "ProductManager Sign In | SHOE ZONE",
-                errorMessage: "Incorrect Password",
-              });
-        }
+                if(password==productManager.password){
+                    req.session.productManager = req.body.email;
+                      console.log("productManager success");
+                       res.redirect('/productManager/products');
+                  }else{
+          
+                      res.render("productManager/partials/signIn", {
+                          documentTitle: "ProductManager Sign In | SHOE ZONE",
+                          errorMessage: "Incorrect Password",
+                        });
+                  }
+
+            }else{
+                res.render("productManager/partials/signIn", {
+                    documentTitle: "ProductManager Sign In | SHOE ZONE",
+                    errorMessage: "Your Acount is Blocked",
+                  })
+
+            }
+        
+       
     }else{
         res.render("productManager/partials/signIn", {
             documentTitle: "ProductManager Sign In | SHOE ZONE",
