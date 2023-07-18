@@ -1,13 +1,18 @@
 const userCollection=require("../../models/user/details");
 const bannerCollection=require("../../models/admin/banner");
 const productCollection=require("../../models/admin/product");
+const categoryCollection=require("../../models/user/cart");
+const cartCollection = require("../../models/user/cart");
 
 
 exports.viewAll = async (req, res) => {
   try {
     let  currentUser
+    let  userCart
     if (req.session.userID) {
      currentUser = await userCollection.findById(req.session.userID);
+     userCart= await cartCollection.findOne({customer:req.session.userID})
+
     }
     const banners = await bannerCollection.find({ active: true }).limit(3).sort({title:1});
     const allProducts=await productCollection.find({listed:true})
@@ -37,6 +42,7 @@ exports.viewAll = async (req, res) => {
       men,
       women,
       banners,
+      userCart
     });
   
   } catch (error) {

@@ -17,7 +17,7 @@ exports.signInPage =async (req, res) => {
     }
   };
 
-  exports.verifyUser = async (req, res) => {
+exports.verifyUser = async (req, res) => {
     try{
          const inputEmail=req.body.email;
          const inputPassword=req.body.password;
@@ -40,6 +40,13 @@ exports.signInPage =async (req, res) => {
                     });
                   }
             }
+         }else{
+
+          res.render("user/partials/signIn", {
+            documentTitle: "User Sign In | SHOE ZONE",
+            errorMessage: "User not exist",
+          });
+
          }
     }
     catch(error){

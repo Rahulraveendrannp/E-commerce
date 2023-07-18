@@ -45,6 +45,7 @@ function addToCart(productID) {
         id: productID,
       },
       success: (res) => {
+       
         if (res.success == "countAdded") {
           Swal.fire({
             toast: true,
@@ -56,6 +57,7 @@ function addToCart(productID) {
             animation: true,
             title: "Count added in cart",
           });
+          $("#cartCount").load(location.href + " #cartCount");
         } else if (res.success == "addedToCart") {
           Swal.fire({
             toast: true,
@@ -67,6 +69,7 @@ function addToCart(productID) {
             animation: true,
             title: "Added to cart",
           });
+          $("#cartCount").load(location.href + " #cartCount");
         }else if(res.success === "outofstcok" ){
           Swal.fire({
             toast: true,

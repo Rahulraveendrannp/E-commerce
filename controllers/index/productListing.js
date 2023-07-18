@@ -1,15 +1,17 @@
 const userCollection=require("../../models/user/details");
 const productCollection=require("../../models/admin/product");
 const categoryCollection=require("../../models/admin/category");
-
+const cartCollection=require("../../models/user/cart")
 exports.ourCollection=async(req,res)=>{
     try{
         let collectionId=req.query.category;       
         let listing=req.session.listing;
         let listingName
         let currentUser=null;
+        let  userCart=null;
         if(req.session.userID){
-          currentUser= await userCollection.findOne({_id:req.session.userID})
+          currentUser= await userCollection.findOne({_id:req.session.userID});
+          userCart= await cartCollection.findOne({customer:req.session.userID})
         }
         if(!req.session.listingName){
           listingName="Our Collection"
@@ -36,6 +38,7 @@ exports.ourCollection=async(req,res)=>{
             listingName,
             listing,
             currentUser,
+            userCart,
             documentTitle: "Shoe Zone"
         })
     }catch(error){
@@ -217,10 +220,12 @@ exports.categories=async(req,res)=>{
   let category=req.query.category;
   let listing;
   let currentUser=null;
-  let currentCategory
+  let  userCart=null;
+  let currentCategory;
 
   if(req.session.userID){
     currentUser= await userCollection.findOne({_id:req.session.userID})
+    userCart= await cartCollection.findOne({customer:req.session.userID})
   }
 
     if (category== "newReleases") {
@@ -252,7 +257,8 @@ exports.categories=async(req,res)=>{
         documentTitle: `${currentCategory[0].name} | SHOE ZONE`,
         listingName: currentCategory[0].name,
         session:req.session.userID,
-        currentUser
+        currentUser,
+        userCart
       });
     }
     }

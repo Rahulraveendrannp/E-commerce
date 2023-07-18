@@ -4,11 +4,13 @@ const userCollection=require("../../models/user/details");
 const wishlistCollection=require("../../models/user/wishlist");
 const reviewCollection=require("../../models/user/reviews.js")
 const moment=require("moment");
+const cartCollection=require("../../models/user/cart")
 
 
 exports.view=async(req,res)=>{
     try{
         const currentUser= await  userCollection.findById(req.session.userID);
+        const userCart= await cartCollection.findOne({customer:req.session.userID})
         const productDetails=await productCollection.findById(req.params.id).populate("brand").populate("category");
         let productsInWishlist=null;
         let percentageOffer=null;
@@ -46,7 +48,8 @@ exports.view=async(req,res)=>{
             numberOfReviews,
             moment,
             listing:similarProducts,
-            percentageOffer
+            percentageOffer,
+            userCart
 
           });
 

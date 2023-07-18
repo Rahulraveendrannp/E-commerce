@@ -86,8 +86,11 @@
             <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
               <a class="nav-link" href="/users/wishlist">Wishlist</a>
             </span>
-            <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
-              <a class="nav-link" href="/users/cart">Cart</a>
+            <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3 ">
+              <a class="nav-link" href="/users/cart" style="position: relative;">Cart
+                <% if(session){%> <span id="itemCount"><%=locals.userCart.totalQuantity%></span> <%}%>
+              </a>
+              
             </span>
 
             <span class="nav-item nav-link text-center mb-2 mb-lg-0 ms-lg-3">
