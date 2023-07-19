@@ -255,8 +255,8 @@ exports.couponCheck=async(req,res)=>{
             payment_method: "paypal"
         },
         redirect_urls: {
-            return_url: `http://localhost:3001/users/cart/checkout/${transactionID}`,
-            cancel_url: "http://localhost:3001/users/cart/checkout"
+            return_url: `https://shoezone.live/users/cart/checkout/${transactionID}`,
+            cancel_url: "https://shoezone.live/users/cart/checkout"
         },
         transactions: [{
             item_list: {
