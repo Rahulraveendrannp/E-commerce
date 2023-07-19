@@ -6,7 +6,10 @@ const cartSchema = new mongoose.Schema({
     ref: "UserDetails",
   },
   totalPrice: Number,
-  totalQuantity: Number,
+  totalQuantity: {
+    type: Number,
+    default: 0,
+  },
   products: [
     {
       name: {
