@@ -104,21 +104,10 @@
           class="container px-3 d-flex header-top-links justify-content-around"
         >
           <a class="px-3" href="/">Homepage</a>
-          <%if(locals.managerSession){%>
+         
+            <span><a href="/productManager/signOut">Sign Out</a></span>
 
-            <span><a href="/admin/signOut">Sign Out</a></span>
-
-       <%   } else {%>
-
-            <div class="d-none d-lg-block">
-              <span class="d-flex align-items-center">
-                <i class="fab fa-instagram mx-1" ></i>
-                <i class="fab fa-facebook-f mx-1"></i>
-                <i class="fab fa-twitter mx-1"></i>
-                <i class="fab fa-whatsapp mx-1"></i>
-              </span>
-            </div>
-         <% } %>
+     
         </div>
       </div>
       <nav

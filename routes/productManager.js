@@ -9,7 +9,7 @@ const orders=require("../controllers/productManager/orders");
 const objectIdCheck=require("../middlewares/productManager/objectIdCheck");
 const coupon=require("../controllers/productManager/coupon");
 const forgotPassword=require("../controllers/productManager/forgotPassword");
-
+const signOut=require("../controllers/productManager/signOut")
 
 
 // Sign In
@@ -84,10 +84,7 @@ router.post("/forgotPassword/otpVerification", forgotPassword.otpVerification);
 
 router.get("/changePassword",forgotPassword.passwordChangePage);
 router.post("/changePassword",forgotPassword.updatePassword);
-
-
-
-
+router.get("/signOut",signOut.signOut);
 
 
 

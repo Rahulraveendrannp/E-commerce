@@ -1,8 +1,8 @@
 exports.signOut = (req, res) => {
   try {
     req.session.destroy();
-    res.redirect("/admin");
+    res.redirect("/productManager");
   } catch (error) {
-    console.log("Error signing out admin: " + error);
+    console.log("Error signing out manager: " + error);
   }
 };
