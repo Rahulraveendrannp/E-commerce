@@ -236,6 +236,9 @@ exports.categories=async(req,res)=>{
         listing: listing,
         documentTitle: `New Releases | SHOE ZONE`, 
         listingName: "New Releases",
+        session:req.session.userID,
+        userCart,
+        currentUser
       });
     } else {
       if(!req.session.searched){
