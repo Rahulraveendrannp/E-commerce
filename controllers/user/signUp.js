@@ -134,7 +134,7 @@ exports.sendOtp=async(req,res)=>{
     if (otpChecker) {
         const newUserDetails = new userDetails(req.session.newUserDetails);
         newUserDetails.save();
-        res.redirect("/users/signIn");
+        
         const existUserDetails= await userDetails.findOne({email:otpChecker.email})
         const userID = existUserDetails._id;
         const newCart = new cartCollection({
@@ -151,6 +151,7 @@ exports.sendOtp=async(req,res)=>{
           $set: { wishlist:new mongoose.Types.ObjectId(newWishlist._id) },
         });
         await newWishlist.save();
+        res.redirect("/users/signIn");
       } else {
         res.render("user/partials/otp", {
           documentTitle: "OTP Verification | SHOE ZONE",
