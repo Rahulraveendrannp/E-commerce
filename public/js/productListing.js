@@ -12,15 +12,15 @@ function filter(filterBy){
                 $("#listingpage").load(location.href + " #listingpage");
                 $("#searchInput").val("");
             }else{
-            Swal.fire({
-                toast: true,
-                icon: "success",
-                position: "top-right",
-                showConfirmButton: false,
-                timer: 1000,
-                animation: true,
-                title: "Filtered",
-              });
+            // Swal.fire({
+            //     toast: true,
+            //     icon: "success",
+            //     position: "top-right",
+            //     showConfirmButton: false,
+            //     timer: 1000,
+            //     animation: true,
+            //     title: "Filtered",
+            //   });
               $("#listingpage").load(location.href + " #listingpage");
               
               if (res.success == 0) {
@@ -38,15 +38,15 @@ function sortBy(order) {
       data: { sortBy: order },
       success: (res) => {
         if (res.sorted == '1') {    
-          Swal.fire({
-            toast: true,
-            icon: "success",
-            position: "top-right",
-            showConfirmButton: false,
-            timer: 1000,
-            animation: true,
-            title: "Sorted",
-          });
+          // Swal.fire({
+          //   toast: true,
+          //   icon: "success",
+          //   position: "top-right",
+          //   showConfirmButton: false,
+          //   timer: 1000,
+          //   animation: true,
+          //   title: "Sorted",
+          // });
           $("#listingpage").load(location.href + " #listingpage");
         }
       },
